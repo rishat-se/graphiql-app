@@ -1,10 +1,9 @@
-import Link from 'next/link';
+import styles from './header.module.scss';
 
 export default function Header() {
   return (
-    <div>
-      <Link href="/">GraphiQl</Link>
-      Sign Out
-    </div>
+    <header className={styles.header}>
+      <span className={styles.logo}>Codeminers</span>
+    </header>
   );
 }

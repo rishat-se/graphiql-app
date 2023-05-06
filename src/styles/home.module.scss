@@ -1,0 +1,42 @@
+@import "./variables.scss";
+
+.container {
+  font-family: $RMfont;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin: 0 auto;
+  padding: 30px;
+  justify-content: center;
+  align-items: center;
+  flex: 1 1 auto;
+}
+
+.title {
+  font-size: 2.5em;
+  color: $brightgreen;
+  text-shadow: $textShadowGreen;
+  max-width: 450px;
+  text-align: center;
+}
+
+.description {
+  font-size: 2em;
+  color: $violet;
+  text-shadow: $textShadowViolet;
+  max-width: 450px;
+  text-align: center;
+}
+
+.link {
+  font-size: 2.5em;
+  color: $red;
+  text-shadow: $textShadowRed;
+  max-width: 450px;
+  text-align: center;
+  &:hover {
+    transition: all 0.3s ease;
+    color: $violet;
+    text-shadow: $textShadowViolet;
+  }
+}

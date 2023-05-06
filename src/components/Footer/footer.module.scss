@@ -1,0 +1,15 @@
+@import "../../styles/variables";
+
+.footer {
+  font-family: $RMfont;
+  display: flex;
+  padding: 0.5em;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.year {
+  font-size: 2em;
+  color: $violet;
+  text-shadow: $textShadowViolet;
+}

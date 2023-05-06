@@ -1,0 +1,11 @@
+@font-face {
+  font-family: "Rick&Morty";
+  src: url("../../public/fonts/WubbaLubbaDubDub.otf");
+}
+
+#__next {
+  background-color: rgb(26, 28, 27);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
