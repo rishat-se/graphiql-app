@@ -1,0 +1,15 @@
+@import "../../styles/variables.scss";
+
+.header {
+  font-family: $RMfont;
+  width: 60px;
+  padding: 10px;
+  display: flex;
+  gap: 20px;
+  font-size: 2em;
+}
+
+.logo {
+  color: $green;
+  text-shadow: $textShadowGreen;
+}
