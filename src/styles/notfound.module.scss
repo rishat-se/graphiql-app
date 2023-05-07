@@ -1,0 +1,61 @@
+@import "./variables.scss";
+.container {
+  font-family: $RMfont;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+}
+
+.title {
+  font-size: 2em;
+}
+
+.link {
+  color: $green;
+  text-shadow: $textShadowGreen;
+  background-color: transparent;
+  font-size: 2em;
+  &:hover {
+    color: $violet;
+    text-shadow: $textShadowViolet;
+  }
+}
+
+.error {
+  font-size: 5em;
+  color: $red;
+  text-shadow: $textShadowRed;
+  animation: blink 2s infinite linear;
+}
+
+.error__desc {
+  font-size: 2em;
+  color: $red;
+  text-shadow: $textShadowRed;
+  animation: blink 2s infinite linear;
+}
+
+@keyframes blink {
+  0% {
+    color: $red;
+    text-shadow: $textShadowRed;
+  }
+  50% {
+    color: $green;
+    text-shadow: $textShadowGreen;
+  }
+  100% {
+    color: $violet;
+    text-shadow: $textShadowViolet;
+  }
+}

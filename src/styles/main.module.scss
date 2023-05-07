@@ -1,0 +1,12 @@
+.container {
+  flex: 1 1 auto;
+  display: flex;
+  gap: 2em;
+  padding: 2em;
+  justify-content: center;
+}
+
+.button {
+  height: 20px;
+  width: 70px;
+}

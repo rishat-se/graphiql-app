@@ -1,10 +1,10 @@
+import DevsGits from '@/components/DevsGits/DevsGits';
+import styles from '@/components/footer/footer.module.scss';
 import { devsArray } from '@/constants/devs';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import RssLogo from '../../../public/icons/method-draw-image.svg';
-import DevsGits from '../DevsGits/DevsGits';
-import styles from './footer.module.scss';
 
 export default function Footer() {
   const { pathname } = useRouter();

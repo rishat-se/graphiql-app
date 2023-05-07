@@ -1,13 +1,13 @@
 import Layout from '@/components/Layout/Layout';
+import styles from '@/styles/home.module.scss';
 import Head from 'next/head';
 import Link from 'next/link';
-import styles from '../styles/home.module.scss';
 
 export default function Home() {
   return (
     <>
       <Head>
-        <title>GraphiQL</title>
+        <title>GraphiQL : Home</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         {/*Needs to be changed to custom one */}
         <link rel="icon" href="../../public/images/portal.png" />

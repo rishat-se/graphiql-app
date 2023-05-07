@@ -1,6 +1,6 @@
+import { IDevsComp } from '@/constants/devs';
 import Image from 'next/image';
 import Link from 'next/link';
-import { IDevsComp } from '../../constants/devs';
 import styles from './dev.module.scss';
 
 export default function DevComponent(dev: IDevsComp) {
