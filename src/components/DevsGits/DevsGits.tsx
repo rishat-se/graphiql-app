@@ -1,5 +1,5 @@
+import DevComponent from '@/components/DevComponent/DevComponent';
 import { IDevsArray } from '@/constants/devs';
-import DevComponent from '../DevComponent/DevComponent';
 import styles from './devs.module.scss';
 export default function DevsGits(props: IDevsArray) {
   const { devs } = props;

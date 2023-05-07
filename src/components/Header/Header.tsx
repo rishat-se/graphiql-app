@@ -1,9 +1,15 @@
+import Link from 'next/link';
 import styles from './header.module.scss';
 
 export default function Header() {
   return (
     <header className={styles.header}>
-      <span className={styles.logo}>Codeminers</span>
+      <Link href="/" className={styles.logo}>
+        Codeminers
+      </Link>
+      <button className={styles.button} type="button">
+        En
+      </button>
     </header>
   );
 }

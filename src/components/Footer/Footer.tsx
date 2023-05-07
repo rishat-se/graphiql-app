@@ -1,26 +1,25 @@
+import DevsGits from '@/components/DevsGits/DevsGits';
+import styles from '@/components/footer/footer.module.scss';
 import { devsArray } from '@/constants/devs';
 import Image from 'next/image';
 import Link from 'next/link';
-import RssLogo from '../../../public/icons/rs_school_js.svg';
-import DevsGits from '../DevsGits/DevsGits';
-import styles from './footer.module.scss';
+import { useRouter } from 'next/router';
+import RssLogo from '../../../public/icons/method-draw-image.svg';
+
 export default function Footer() {
-  const rsLogoHeight = 50;
-  const rsLogoRatio = 2.78;
+  const { pathname } = useRouter();
+
+  const rootRoute = pathname === '/';
+
   return (
-    <footer className={styles.footer}>
+    <footer className={rootRoute ? styles.footer : styles.special}>
       <div>
         <Link href="https://rs.school/react/">
-          <Image
-            src={RssLogo}
-            width={rsLogoHeight * rsLogoRatio}
-            height={rsLogoHeight}
-            alt="course logo"
-          />
+          <Image src={RssLogo} width={70} height={40} alt="course logo" />
         </Link>
       </div>
       <p className={styles.year}>2023</p>
-      <DevsGits devs={devsArray.devs} />
+      {rootRoute ? <DevsGits devs={devsArray.devs} /> : null}
     </footer>
   );
 }

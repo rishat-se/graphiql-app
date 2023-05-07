@@ -2,9 +2,10 @@
 
 .header {
   font-family: $RMfont;
-  width: 60px;
   padding: 10px;
   display: flex;
+  justify-content: space-between;
+  align-items: center;
   gap: 20px;
   font-size: 2em;
 }
@@ -12,4 +13,19 @@
 .logo {
   color: $green;
   text-shadow: $textShadowGreen;
+  &:hover {
+    color: $violet;
+    text-shadow: $textShadowViolet;
+  }
+}
+
+.button {
+  color: $green;
+  text-shadow: $textShadowGreen;
+  font-size: inherit;
+  background-color: transparent;
+  &:hover {
+    color: $violet;
+    text-shadow: $textShadowViolet;
+  }
 }

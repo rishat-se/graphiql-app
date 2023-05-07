@@ -4,12 +4,22 @@
   font-family: $RMfont;
   display: flex;
   padding: 0.5em;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5em;
+}
+.special {
+  font-family: $RMfont;
+  display: flex;
+  padding: 0.5em;
+  justify-content: center;
+  align-items: center;
+  gap: 0.8em;
 }
 
 .year {
   font-size: 2em;
-  color: $violet;
-  text-shadow: $textShadowViolet;
+  color: $brightgreen;
+  text-shadow: $textShadowGreen;
 }
