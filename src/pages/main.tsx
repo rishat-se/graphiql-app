@@ -3,37 +3,34 @@ import styles from '@/styles/main.module.scss';
 import { GraphQLClient, gql } from 'graphql-request';
 import Head from 'next/head';
 import { apiURL } from '../constants/api';
-import { GetStaticProps } from 'next';
+import { useEffect, useState } from 'react';
 
-export const getStaticProps: GetStaticProps = async () => {
-  const query = gql`
-    query {
-      __type(name: "Character") {
-        fields {
-          name
-        }
-      }
-    }
-  `;
-  const client = new GraphQLClient(apiURL, { headers: {} });
-  const data = await client.request(query);
-  // console.log(JSON.stringify(data));
-  const curTime = new Date().toLocaleTimeString();
-  console.log(curTime);
-  return {
-    props: {
-      data,
-      curTime,
-    },
-  };
-};
-
-type MainProps = {
+type ISDL = {
   data: object;
-  curTime: Date;
+  curTime: string;
 };
 
-export default function Main({ data, curTime }: MainProps) {
+export default function Main() {
+  const [SDL, setSDL] = useState<ISDL>();
+  useEffect(() => {
+    const fetchSDL = async () => {
+      const query = gql`
+        query {
+          __type(name: "Character") {
+            fields {
+              name
+            }
+          }
+        }
+      `;
+      const client = new GraphQLClient(apiURL, { headers: {} });
+      const data: object = await client.request(query);
+      const curTime = new Date().toLocaleTimeString();
+      return { data, curTime };
+    };
+    fetchSDL().then((newSDL) => setSDL(newSDL));
+  }, []);
+
   return (
     <>
       <Head>
@@ -47,7 +44,7 @@ export default function Main({ data, curTime }: MainProps) {
                 name="request"
                 rows={30}
                 cols={50}
-                defaultValue={`${curTime} - ${JSON.stringify(data)}`}
+                defaultValue={SDL ? `${SDL.curTime} - ${JSON.stringify(SDL.data)}` : ''}
               ></textarea>
             </label>
           </div>
