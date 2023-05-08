@@ -3,8 +3,9 @@ import styles from '@/styles/main.module.scss';
 import { GraphQLClient, gql } from 'graphql-request';
 import Head from 'next/head';
 import { apiURL } from '../constants/api';
+import { GetStaticProps } from 'next';
 
-export const getStaticProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   const query = gql`
     query {
       __type(name: "Character") {
