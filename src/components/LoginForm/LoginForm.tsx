@@ -2,14 +2,14 @@ import { IFormData } from '@/constants/form-types';
 import { emailPattern, passwordPattern } from '@/constants/regexps';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import { authSlice } from '@/store/slices/userSlice';
-import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { SubmitHandler } from 'react-hook-form/dist/types';
 import styles from './form.module.scss';
 
-export default function Form() {
+export default function LoginForm() {
   const { isAuth } = useAppSelector((state) => state.authReducer);
   const { signIn } = authSlice.actions;
   const dispatch = useAppDispatch();
@@ -22,16 +22,24 @@ export default function Form() {
   } = useForm<IFormData>();
 
   const onSubmit: SubmitHandler<IFormData> = async (data) => {
-    const auth = getAuth();
-    const createdUser = await createUserWithEmailAndPassword(auth, data.email, data.password);
-    dispatch(
-      signIn({
-        isAuth: true,
-        email: createdUser.user.email,
-        token: createdUser.user.refreshToken,
-        id: createdUser.user.uid,
-      })
-    );
+    try {
+      const auth = getAuth();
+      const createdUser = await signInWithEmailAndPassword(auth, data.email, data.password);
+      dispatch(
+        signIn({
+          isAuth: true,
+          email: createdUser.user.email,
+          token: createdUser.user.refreshToken,
+          id: createdUser.user.uid,
+        })
+      );
+    } catch (e) {
+      if (e) {
+        if (e instanceof Error) {
+          console.log(e.message);
+        }
+      }
+    }
   };
 
   useEffect(() => {
@@ -73,7 +81,7 @@ export default function Form() {
           />
         </label>
         <div className={styles.submit_container}>
-          <input type="submit" className={styles.submit} value="Sign up" />
+          <input type="submit" className={styles.submit} value="Sign in" />
         </div>
       </form>
     </div>
