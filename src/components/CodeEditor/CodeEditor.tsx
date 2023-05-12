@@ -6,8 +6,8 @@ import { CODEMIRROR_THEME, CODEMIRROR_EXTENSIONS } from '@/constants/codeMirrorS
 import PlayIcon from '@/components/icons/PlayIcon';
 import Image from 'next/image';
 import ArrowImg from '../../../public/icons/up-arrow.svg';
-import Link from 'next/link';
-import { API_BASE_LINK } from '@/constants';
+import Tabs from './Tabs/Tabs';
+import Output from './Output/Output';
 
 export default function CodeEditor() {
   const [reqValue, setReqValue] = useState<string>('');
@@ -22,7 +22,9 @@ export default function CodeEditor() {
   };
 
   return (
-    <section className={`${styles.editor} ${styles.editor__wrapper}`}>
+    <section className={styles.editor}>
+      <Tabs />
+
       <div className={styles.editor__input}>
         <div className={styles.editor__wrapper}>
           <div className={styles.test}>
@@ -71,30 +73,7 @@ export default function CodeEditor() {
         </div>
       </div>
 
-      <div className={styles.editor__output}>
-        <div className={styles.editor__tabs}>
-          <button className={styles.editor__addTab}>+</button>
-          <Link href={API_BASE_LINK} className={styles.editor__apiLink}>
-            RickAndMortyQL
-          </Link>
-        </div>
-
-        <div className={styles.test}>
-          <CodeMirror
-            className={styles.test2}
-            theme={CODEMIRROR_THEME}
-            value={resValue}
-            extensions={CODEMIRROR_EXTENSIONS}
-            editable={false}
-            height="100%"
-            basicSetup={{ lineNumbers: false }}
-          />
-        </div>
-
-        <div>
-          <p>Request</p>
-        </div>
-      </div>
+      <Output value={resValue} />
     </section>
   );
 }

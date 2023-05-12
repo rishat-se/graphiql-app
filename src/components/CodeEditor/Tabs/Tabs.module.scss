@@ -1,0 +1,87 @@
+@import '@/styles/variables';
+
+.tabs {
+  align-self: flex-start;
+
+  display: flex;
+  justify-content: space-between;
+
+  width: 100%;
+
+  &__list {
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+
+    border-radius: 5px;
+    overflow: hidden;
+    transition: 0.2s;
+    cursor: pointer;
+
+    &_active {
+      background-color: rgb(27, 26, 26);
+    }
+  }
+
+  &__title {
+    padding-left: 8px;
+    transform: translateY(-3px);
+  }
+
+  &__delete {
+    padding: 8px 4px;
+
+    background-color: transparent;
+    transition: 0.2s;
+
+    &_img {
+      transform: rotate(45deg);
+    }
+
+    &:hover {
+      background-color: rgb(30, 29, 29);
+    }
+
+    &:active {
+      opacity: 0.7;
+    }
+  }
+
+  &__wrapper {
+    display: flex;
+    align-items: stretch;
+  }
+
+  &__add {
+    margin-right: 10px;
+    padding: 0 8px;
+
+    background-color: transparent;
+    border-radius: 5px;
+    transition: 0.2s;
+
+    &:hover {
+      background-color: rgb(27, 26, 26);
+    }
+
+    &:active {
+      opacity: 0.7;
+    }
+  }
+
+  &__api {
+    align-self: center;
+
+    color: $green;
+    transition: 0.2s;
+
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+}

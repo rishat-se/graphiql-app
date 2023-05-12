@@ -1,127 +1,160 @@
 @import '@/styles/variables';
 
 .editor {
-  // flex-grow: 1;
-  max-height: 100%;
-  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
 
-  background-color: rgb(39, 38, 38);
-  border-radius: 5px;
+  width: 100%;
+  padding: 10px;
 
   color: white;
   font-family: $RMfont;
-  font-size: 16px;
+  font-size: 18px;
 
-  &__wrapper {
-    flex-grow: 1;
-    display: flex;
-    gap: 10px;
-  }
-
-  &__mirror {
-    flex-grow: 1;
-    // width: 100%;
-    // height: 100%;
-
-    // border-radius: 5px;
-    overflow: hidden;
-  }
-
-  &__reqButton {
-    align-self: start;
-    display: flex;
-
-    padding: 12px;
-    color: rgba(255, 255, 255, 0.7);
-
-    background-color: rgb(73, 193, 43);
-    border-radius: 5px;
-    transition: 0.3s;
-
-    &:hover {
-      background-color: rgb(58, 155, 34);
-    }
-
-    &:active {
-      opacity: 0.8;
-    }
-  }
-
-  &__input {
-    flex-grow: 1;
-    max-width: 50%;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    // width: calc(50% + 25px);
-    padding: 10px;
-
-    background-color: rgb(27, 26, 26);
-    border-radius: 5px;
-  }
-
-  &__output {
-    flex-grow: 1;
-    max-width: 50%;
-  }
-
-  &__apiLink {
-    color: white;
-    font: $RMfont;
-  }
-
-  &__tabs {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-  }
+  background-color: rgb(39, 38, 38);
+  border-radius: 5px;
 }
 
-.tools {
-  border-top: 2px solid rgb(39, 38, 38);
-  padding-top: 10px;
+// .editor {
+//   // flex-grow: 1;
+//   max-height: 100%;
+//   padding: 10px;
 
-  &__button {
-    padding: 10px 15px;
+//   background-color: rgb(39, 38, 38);
+//   border-radius: 5px;
 
-    color: white;
-    font-family: $RMfont;
-    font-size: 16px;
+//   color: white;
+//   font-family: $RMfont;
+//   font-size: 16px;
 
-    background-color: transparent;
-    border-radius: 5px;
+//   flex-wrap: wrap;
 
-    &:hover {
-      background-color: rgb(39, 38, 38);
-    }
-  }
+//   &__wrapper {
+//     flex-grow: 1;
+//     display: flex;
+//     gap: 10px;
+//   }
 
-  &__toggler {
-    float: right;
+//   &__mirror {
+//     flex-grow: 1;
+//     // width: 100%;
+//     // height: 100%;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+//     // border-radius: 5px;
+//     overflow: hidden;
+//   }
 
-    padding: 15px;
-  }
+//   &__reqButton {
+//     align-self: start;
+//     display: flex;
 
-  &__toggler_hidden {
-    transform: rotate(180deg);
-  }
-}
+//     padding: 12px;
+//     color: rgba(255, 255, 255, 0.7);
 
-.test {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-}
+//     background-color: rgb(73, 193, 43);
+//     border-radius: 5px;
+//     transition: 0.3s;
 
-.test2 {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  padding-bottom: 10px;
-}
+//     &:hover {
+//       background-color: rgb(58, 155, 34);
+//     }
+
+//     &:active {
+//       opacity: 0.8;
+//     }
+//   }
+
+//   &__input {
+//     flex-grow: 1;
+//     max-width: 50%;
+
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: space-between;
+//     // width: calc(50% + 25px);
+//     padding: 10px;
+
+//     background-color: rgb(27, 26, 26);
+//     border-radius: 5px;
+//   }
+
+//   &__output {
+//     flex-grow: 1;
+//     display: flex;
+//     flex-direction: column;
+//     gap: 10px;
+//     max-width: 50%;
+//   }
+
+//   &__apiLink {
+//     color: white;
+//     font: $RMfont;
+//   }
+
+//   &__tabs {
+//     display: flex;
+//     justify-content: flex-end;
+//     align-items: center;
+//     gap: 10px;
+//     width: 100%;
+//   }
+
+//   &__addTab {
+//     // padding: 10px 15px;
+
+//     background-color: transparent;
+//     border-radius: 5px;
+
+//     &:hover {
+//       background-color: rgb(27, 26, 26);;
+//     }
+//   }
+// }
+
+// .tools {
+//   border-top: 2px solid rgb(39, 38, 38);
+//   padding-top: 10px;
+
+//   &__button {
+//     padding: 10px 15px;
+
+//     color: white;
+//     font-family: $RMfont;
+//     font-size: 16px;
+
+//     background-color: transparent;
+//     border-radius: 5px;
+
+//     &:hover {
+//       background-color: rgb(39, 38, 38);
+//     }
+//   }
+
+//   &__toggler {
+//     float: right;
+
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+
+//     padding: 15px;
+//   }
+
+//   &__toggler_hidden {
+//     transform: rotate(180deg);
+//   }
+// }
+
+// .test {
+//   position: relative;
+//   width: 100%;
+//   height: 100%;
+//   overflow: hidden;
+// }
+
+// .test2 {
+//   position: absolute;
+//   width: 100%;
+//   height: 100%;
+//   padding-bottom: 10px;
+// }
