@@ -11,8 +11,8 @@ export const CODEMIRROR_THEME = createTheme({
     selection: '#036dd626',
     selectionMatch: '#036dd626',
     lineHighlight: 'transparent',
-    gutterBackground: 'transparent', // rgba(6, 87, 105, 0.3) transparent
-    gutterForeground: '#8a919966',
+    gutterBackground: 'rgb(27, 26, 26)', // rgb(27, 26, 26) transparent
+    gutterForeground: '#8a919966', // #8a919966
   },
   styles: [
     { tag: t.comment, color: '#787b8099' },

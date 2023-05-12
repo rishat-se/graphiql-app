@@ -7,6 +7,7 @@ import PlayIcon from '@/components/icons/PlayIcon';
 import Image from 'next/image';
 import ArrowImg from '../../../public/icons/up-arrow.svg';
 import Link from 'next/link';
+import { API_BASE_LINK } from '@/constants';
 
 export default function CodeEditor() {
   const [reqValue, setReqValue] = useState<string>('');
@@ -24,14 +25,16 @@ export default function CodeEditor() {
     <section className={`${styles.editor} ${styles.editor__wrapper}`}>
       <div className={styles.editor__input}>
         <div className={styles.editor__wrapper}>
-          <CodeMirror
-            className={styles.editor__mirror}
-            theme={CODEMIRROR_THEME}
-            height="100%"
-            value={reqValue}
-            extensions={CODEMIRROR_EXTENSIONS}
-            onChange={onChange}
-          />
+          <div className={styles.test}>
+            <CodeMirror
+              className={styles.test2}
+              theme={CODEMIRROR_THEME}
+              value={reqValue}
+              height="100%"
+              extensions={CODEMIRROR_EXTENSIONS}
+              onChange={onChange}
+            />
+          </div>
 
           <button className={styles.editor__reqButton} onClick={requestHandler}>
             <PlayIcon />
@@ -63,22 +66,34 @@ export default function CodeEditor() {
               height="100px"
               value=""
               extensions={CODEMIRROR_EXTENSIONS}
-              onChange={onChange}
             />
           )}
         </div>
       </div>
 
       <div className={styles.editor__output}>
-        <CodeMirror
-          className={styles.editor__mirror}
-          theme={CODEMIRROR_THEME}
-          height="100%"
-          value={resValue}
-          extensions={CODEMIRROR_EXTENSIONS}
-          editable={false}
-          basicSetup={{ lineNumbers: false }}
-        />
+        <div className={styles.editor__tabs}>
+          <button className={styles.editor__addTab}>+</button>
+          <Link href={API_BASE_LINK} className={styles.editor__apiLink}>
+            RickAndMortyQL
+          </Link>
+        </div>
+
+        <div className={styles.test}>
+          <CodeMirror
+            className={styles.test2}
+            theme={CODEMIRROR_THEME}
+            value={resValue}
+            extensions={CODEMIRROR_EXTENSIONS}
+            editable={false}
+            height="100%"
+            basicSetup={{ lineNumbers: false }}
+          />
+        </div>
+
+        <div>
+          <p>Request</p>
+        </div>
       </div>
     </section>
   );
