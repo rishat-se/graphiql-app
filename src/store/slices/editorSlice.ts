@@ -1,19 +1,29 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 interface IEditorInitialState {
-  reqValue: string | null;
-  variables: string | null;
-  headers: string | null;
+  reqValue: string;
+  variables: string;
+  headers: string;
 }
 
 const initialState: IEditorInitialState = {
-  reqValue: null,
-  variables: null,
-  headers: null,
+  reqValue: '',
+  variables: '',
+  headers: '',
 };
 
-const editorSlice = createSlice({
+export const editorSlice = createSlice({
   name: 'editor',
   initialState,
-  reducers: {},
+  reducers: {
+    setVariables(state, action: PayloadAction<string>) {
+      state.variables = action.payload;
+    },
+
+    setHeaders(state, action: PayloadAction<string>) {
+      state.headers = action.payload;
+    },
+  },
 });
+
+export const { setVariables, setHeaders } = editorSlice.actions;

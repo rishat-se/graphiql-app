@@ -1,0 +1,53 @@
+@import '@/styles/variables';
+
+.tools {
+  border-top: 3px solid $brightgreen;
+  padding-top: 10px;
+
+  &__button {
+    padding: 6px 12px;
+
+    font-size: 24px;
+
+    color: $green;
+    text-shadow: $textShadowGreen;
+
+    background-color: transparent;
+    border-radius: 5px;
+
+    &:hover {
+      color: $violet;
+      text-shadow: $textShadowViolet;
+    }
+
+    &:last-child {
+      &:hover {
+        background-color: #061519a5;
+      }
+    }
+
+    &_active {
+      color: $red;
+      text-shadow: $textShadowRed;
+
+      &:hover {
+        color: $red;
+        text-shadow: $textShadowRed;
+      }
+    }
+  }
+
+  &__toggler {
+    float: right;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 15px;
+  }
+
+  &__toggler_hidden {
+    transform: rotate(180deg);
+  }
+}

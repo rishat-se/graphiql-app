@@ -3,19 +3,13 @@ import React, { useState, useCallback } from 'react';
 import CodeMirror from '@uiw/react-codemirror';
 import { CODEMIRROR_THEME_INPUT, CODEMIRROR_EXTENSIONS } from '@/constants/codeMirrorSettings';
 import PlayIcon from '@/components/icons/PlayIcon';
-import Image from 'next/image';
-import ArrowImg from '../../../public/icons/up-arrow.svg';
 import Tabs from './Tabs/Tabs';
 import Output from './Output/Output';
+import Tools from './Tools/Tools';
 
 export default function CodeEditor() {
   const [resValue, setResValue] = useState<string>('');
-
   const [reqValue, setReqValue] = useState<string>('');
-  // const [variables, setVariables] = useState<string>('');
-  // const [header, setHeaders] = useState<string>('');
-
-  const [showTools, setShowTools] = useState<boolean>(false);
 
   // const changeToolEditor
 
@@ -48,34 +42,7 @@ export default function CodeEditor() {
           </button>
         </div>
 
-        <div className={styles.tools}>
-          <div>
-            <button className={styles.tools__button}>Variables</button>
-            <button className={styles.tools__button}>Headers</button>
-            <button
-              className={`${styles.tools__button} ${styles.tools__toggler}`}
-              onClick={() => setShowTools((prev) => !prev)}
-            >
-              <Image
-                {...(showTools ? { className: styles.tools__toggler_hidden } : {})}
-                src={ArrowImg}
-                width={16}
-                height={16}
-                alt="Show or hidden tools editor"
-              />
-            </button>
-          </div>
-
-          {showTools && (
-            <CodeMirror
-              className={styles.tools__mirror}
-              theme={CODEMIRROR_THEME_INPUT}
-              height="100px"
-              // value={variables}
-              extensions={CODEMIRROR_EXTENSIONS}
-            />
-          )}
-        </div>
+        <Tools />
       </div>
 
       <Output value={resValue} />
