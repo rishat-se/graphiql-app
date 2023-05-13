@@ -1,4 +1,4 @@
-import { CODEMIRROR_EXTENSIONS, CODEMIRROR_THEME } from '@/constants/codeMirrorSettings';
+import { CODEMIRROR_EXTENSIONS, CODEMIRROR_THEME_OUTPUT } from '@/constants/codeMirrorSettings';
 import React from 'react';
 import CodeMirror from '@uiw/react-codemirror';
 import styles from './Output.module.scss';
@@ -9,11 +9,11 @@ interface OutputProps {
 
 function Output({ value }: OutputProps) {
   return (
-    <div className={styles.editor__output}>
-      <div className={styles.test}>
+    <div className={styles.output}>
+      <div className={styles.output__position}>
         <CodeMirror
-          className={styles.test2}
-          theme={CODEMIRROR_THEME}
+          className={styles.output__mirror}
+          theme={CODEMIRROR_THEME_OUTPUT}
           value={value}
           extensions={CODEMIRROR_EXTENSIONS}
           editable={false}
@@ -22,9 +22,9 @@ function Output({ value }: OutputProps) {
         />
       </div>
 
-      <div>
-        <p>Request</p>
-      </div>
+      {/* <div className={styles.output__details}>
+        <p>MISS 324ms</p>
+      </div> */}
     </div>
   );
 }

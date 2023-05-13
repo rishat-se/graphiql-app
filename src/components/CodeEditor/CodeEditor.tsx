@@ -1,8 +1,7 @@
 import styles from './CodeEditor.module.scss';
 import React, { useState, useCallback } from 'react';
 import CodeMirror from '@uiw/react-codemirror';
-import { ViewUpdate } from '@codemirror/view';
-import { CODEMIRROR_THEME, CODEMIRROR_EXTENSIONS } from '@/constants/codeMirrorSettings';
+import { CODEMIRROR_THEME_INPUT, CODEMIRROR_EXTENSIONS } from '@/constants/codeMirrorSettings';
 import PlayIcon from '@/components/icons/PlayIcon';
 import Image from 'next/image';
 import ArrowImg from '../../../public/icons/up-arrow.svg';
@@ -10,11 +9,17 @@ import Tabs from './Tabs/Tabs';
 import Output from './Output/Output';
 
 export default function CodeEditor() {
-  const [reqValue, setReqValue] = useState<string>('');
   const [resValue, setResValue] = useState<string>('');
+
+  const [reqValue, setReqValue] = useState<string>('');
+  // const [variables, setVariables] = useState<string>('');
+  // const [header, setHeaders] = useState<string>('');
+
   const [showTools, setShowTools] = useState<boolean>(false);
 
-  const onChange = useCallback((value: string, viewUpdate: ViewUpdate) => setReqValue(value), []);
+  // const changeToolEditor
+
+  const onChange = useCallback((value: string) => setReqValue(value), []);
 
   const requestHandler = () => {
     console.log(reqValue);
@@ -25,12 +30,12 @@ export default function CodeEditor() {
     <section className={styles.editor}>
       <Tabs />
 
-      <div className={styles.editor__input}>
-        <div className={styles.editor__wrapper}>
-          <div className={styles.test}>
+      <div className={`${styles.input} ${styles.input_fullHeight}`}>
+        <div className={styles.wrapper}>
+          <div className={styles.input__position}>
             <CodeMirror
-              className={styles.test2}
-              theme={CODEMIRROR_THEME}
+              className={styles.input__mirror}
+              theme={CODEMIRROR_THEME_INPUT}
               value={reqValue}
               height="100%"
               extensions={CODEMIRROR_EXTENSIONS}
@@ -54,8 +59,8 @@ export default function CodeEditor() {
               <Image
                 {...(showTools ? { className: styles.tools__toggler_hidden } : {})}
                 src={ArrowImg}
-                width={12}
-                height={12}
+                width={16}
+                height={16}
                 alt="Show or hidden tools editor"
               />
             </button>
@@ -63,10 +68,10 @@ export default function CodeEditor() {
 
           {showTools && (
             <CodeMirror
-              className={styles.editor__mirror}
-              theme={CODEMIRROR_THEME}
+              className={styles.tools__mirror}
+              theme={CODEMIRROR_THEME_INPUT}
               height="100px"
-              value=""
+              // value={variables}
               extensions={CODEMIRROR_EXTENSIONS}
             />
           )}

@@ -9,7 +9,7 @@ function Tabs() {
   return (
     <div className={styles.tabs}>
       <ul className={styles.tabs__list}>
-        <li className={`${styles.tabs__item} ${styles.tabs__item_active}`}>
+        {/* <li className={`${styles.tabs__item} ${styles.tabs__item_active}`}>
           <span className={styles.tabs__title}>&#8249;untitled&#8250;</span>
 
           <button className={styles.tabs__delete}>
@@ -21,12 +21,12 @@ function Tabs() {
               height={20}
             />
           </button>
-        </li>
+        </li> */}
       </ul>
 
       <div className={styles.tabs__wrapper}>
         <button className={styles.tabs__add}>
-          <Image src={PlusImg} width={20} height={20} alt="add tab" />
+          <Image src={PlusImg} width={24} height={24} alt="add tab" />
         </button>
         <Link href={API_BASE_LINK} className={styles.tabs__api}>
           RickAndMortyQL

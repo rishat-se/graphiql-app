@@ -9,3 +9,8 @@
   display: flex;
   flex-direction: column;
 }
+
+.cm-editor * {
+  font-family: 'Rick&Morty', monospace;
+  font-size: 20px;
+}

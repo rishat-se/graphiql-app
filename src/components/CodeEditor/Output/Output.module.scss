@@ -1,0 +1,31 @@
+@import '@/styles/variables';
+
+.output {
+  grid-column: 2 / 3;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  &__position {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  &__mirror {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    padding-bottom: 10px;
+  }
+
+  &__details {
+    border-top: 2px solid $brightgreen;
+    padding: 10px 0;
+
+    color: $violet;
+    text-shadow: $textShadowViolet;
+  }
+}
