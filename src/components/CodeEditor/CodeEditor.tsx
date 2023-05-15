@@ -2,7 +2,6 @@ import styles from './CodeEditor.module.scss';
 import React, { useState } from 'react';
 import CodeMirror from '@uiw/react-codemirror';
 import { CODEMIRROR_THEME_INPUT, CODEMIRROR_EXTENSIONS } from '@/constants/codeMirrorSettings';
-import PlayIcon from '@/components/icons/PlayIcon';
 import Tabs from './Tabs/Tabs';
 import Output from './Output/Output';
 import Tools from './Tools/Tools';
@@ -12,6 +11,7 @@ import { GraphQLClient } from 'graphql-request';
 import { API_BASE_LINK } from '@/constants';
 import Image from 'next/image';
 import EditorSpinnerGif from '../../../public/images/editor-spinner.gif';
+import PlayIcon from '../../../public/icons/play_23.svg';
 
 async function graphQLRequest(query: string, variables: string, headers: string) {
   const client = new GraphQLClient(API_BASE_LINK);
@@ -62,7 +62,7 @@ export default function CodeEditor() {
           </div>
 
           <button className={styles.editor__reqButton} onClick={requestHandler}>
-            <PlayIcon />
+            <Image src={PlayIcon} width={40} height={40} alt="Send request" />
           </button>
         </div>
 
