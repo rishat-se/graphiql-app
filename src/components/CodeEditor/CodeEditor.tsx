@@ -22,8 +22,7 @@ async function graphQLRequest(query: string, variables: string, headers: string)
 export default function CodeEditor() {
   const dispatch = useAppDispatch();
   const reqValue = useAppSelector((state) => state.editor.reqValue);
-  const variables = useAppSelector((state) => state.editor.variables);
-  const headers = useAppSelector((state) => state.editor.headers);
+  const { variables, headers } = useAppSelector((state) => state.editor.tools);
   const [resValue, setResValue] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
 

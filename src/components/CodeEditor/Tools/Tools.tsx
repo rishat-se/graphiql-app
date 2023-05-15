@@ -1,36 +1,33 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Image from 'next/image';
 import CodeMirror from '@uiw/react-codemirror';
 import { CODEMIRROR_EXTENSIONS, CODEMIRROR_THEME_INPUT } from '@/constants/codeMirrorSettings';
 import styles from './Tools.module.scss';
 import ArrowImg from '../../../../public/icons/up-arrow.svg';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
-import { setHeaders, setVariables } from '@/store/slices/editorSlice';
-
-const enum ToolsMode {
-  Variables,
-  Headers,
-}
+import { setHeaders, setToolsIsOpen, setToolsMode, setVariables } from '@/store/slices/editorSlice';
+import { ToolsMode } from '@/constants';
 
 function Tools() {
   const dispatch = useAppDispatch();
-  const variables = useAppSelector((state) => state.editor.variables);
-  const headers = useAppSelector((state) => state.editor.headers);
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [mode, setMode] = useState<ToolsMode>(ToolsMode.Variables);
+  const { variables, headers, isOpen, mode } = useAppSelector((state) => state.editor.tools);
 
   const onChangeVariables = (value: string) => dispatch(setVariables(value));
 
   const onChangeHeaders = (value: string) => dispatch(setHeaders(value));
 
   const setVariablesMode = () => {
-    setIsOpen(true);
-    setMode(ToolsMode.Variables);
+    dispatch(setToolsIsOpen(true));
+    dispatch(setToolsMode(ToolsMode.Variables));
   };
 
   const setHeadersMode = () => {
-    setIsOpen(true);
-    setMode(ToolsMode.Headers);
+    dispatch(setToolsIsOpen(true));
+    dispatch(setToolsMode(ToolsMode.Headers));
+  };
+
+  const toolsDisplayHandler = () => {
+    dispatch(setToolsIsOpen(!isOpen));
   };
 
   return (
@@ -56,7 +53,7 @@ function Tools() {
 
         <button
           className={`${styles.tools__button} ${styles.tools__toggler}`}
-          onClick={() => setIsOpen((prev) => !prev)}
+          onClick={toolsDisplayHandler}
         >
           <Image
             {...(isOpen ? { className: styles.tools__toggler_hidden } : {})}
