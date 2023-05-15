@@ -3,6 +3,7 @@ import { ToolsMode } from '@/constants';
 
 interface IEditorState {
   reqValue: string;
+  resValue: string;
   tools: {
     isOpen: boolean;
     mode: ToolsMode;
@@ -13,6 +14,7 @@ interface IEditorState {
 
 const initialState: IEditorState = {
   reqValue: '',
+  resValue: '',
   tools: {
     isOpen: false,
     mode: ToolsMode.Variables,
@@ -27,6 +29,10 @@ export const editorSlice = createSlice({
   reducers: {
     setReqValue(state, action: PayloadAction<string>) {
       state.reqValue = action.payload;
+    },
+
+    setResValue(state, action: PayloadAction<string>) {
+      state.resValue = action.payload;
     },
 
     setVariables(state, action: PayloadAction<string>) {
@@ -47,5 +53,5 @@ export const editorSlice = createSlice({
   },
 });
 
-export const { setVariables, setHeaders, setReqValue, setToolsIsOpen, setToolsMode } =
+export const { setVariables, setHeaders, setReqValue, setToolsIsOpen, setToolsMode, setResValue } =
   editorSlice.actions;

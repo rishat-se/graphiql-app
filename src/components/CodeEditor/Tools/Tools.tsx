@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import Image from 'next/image';
-import CodeMirror from '@uiw/react-codemirror';
+import CodeMirror, { ReactCodeMirrorRef } from '@uiw/react-codemirror';
 import { CODEMIRROR_EXTENSIONS, CODEMIRROR_THEME_INPUT } from '@/constants/codeMirrorSettings';
 import styles from './Tools.module.scss';
 import ArrowImg from '../../../../public/icons/up-arrow.svg';
@@ -9,6 +9,7 @@ import { setHeaders, setToolsIsOpen, setToolsMode, setVariables } from '@/store/
 import { ToolsMode } from '@/constants';
 
 function Tools() {
+  const editorRef = useRef<ReactCodeMirrorRef>(null);
   const dispatch = useAppDispatch();
   const { variables, headers, isOpen, mode } = useAppSelector((state) => state.editor.tools);
 
@@ -19,11 +20,13 @@ function Tools() {
   const setVariablesMode = () => {
     dispatch(setToolsIsOpen(true));
     dispatch(setToolsMode(ToolsMode.Variables));
+    editorRef.current?.view?.focus();
   };
 
   const setHeadersMode = () => {
     dispatch(setToolsIsOpen(true));
     dispatch(setToolsMode(ToolsMode.Headers));
+    editorRef.current?.view?.focus();
   };
 
   const toolsDisplayHandler = () => {
@@ -67,6 +70,8 @@ function Tools() {
 
       {isOpen && (
         <CodeMirror
+          ref={editorRef}
+          autoFocus
           className={styles.tools__mirror}
           extensions={CODEMIRROR_EXTENSIONS}
           theme={CODEMIRROR_THEME_INPUT}

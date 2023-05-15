@@ -6,39 +6,35 @@ import Tabs from './Tabs/Tabs';
 import Output from './Output/Output';
 import Tools from './Tools/Tools';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
-import { setReqValue } from '@/store/slices/editorSlice';
-import { GraphQLClient } from 'graphql-request';
-import { API_BASE_LINK } from '@/constants';
+import { setReqValue, setResValue } from '@/store/slices/editorSlice';
+import { ClientError } from 'graphql-request';
 import Image from 'next/image';
 import EditorSpinnerGif from '../../../public/images/editor-spinner.gif';
 import PlayIcon from '../../../public/icons/play_23.svg';
-
-async function graphQLRequest(query: string, variables: string, headers: string) {
-  const client = new GraphQLClient(API_BASE_LINK);
-  const variablesGraphQL = variables ? JSON.parse(variables) : undefined;
-  const headersGraphQL = headers ? JSON.parse(headers) : undefined;
-
-  return await client.request(query, variablesGraphQL, headersGraphQL);
-}
+import { graphQLRequest } from './CodeEditor.utils';
 
 export default function CodeEditor() {
   const dispatch = useAppDispatch();
   const reqValue = useAppSelector((state) => state.editor.reqValue);
   const { variables, headers } = useAppSelector((state) => state.editor.tools);
-  const [resValue, setResValue] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
 
   const onChange = (value: string) => dispatch(setReqValue(value));
 
   const requestHandler = async () => {
-    setLoading(true);
-
     try {
+      setLoading(true);
       const data = await graphQLRequest(reqValue, variables, headers);
 
       setResValue(JSON.stringify(data, undefined, 2));
     } catch (error) {
-      setResValue(JSON.stringify(error, undefined, 2));
+      if (error instanceof Error) {
+        if (error instanceof ClientError) {
+          dispatch(setResValue(JSON.stringify(error.response, undefined, 2)));
+        } else {
+          dispatch(setResValue(`// ${error.name}: ${error.message}`));
+        }
+      }
     } finally {
       setLoading(false);
     }
@@ -47,11 +43,11 @@ export default function CodeEditor() {
   return (
     <section className={styles.editor}>
       <Tabs />
-
       <div className={`${styles.input} ${styles.input_fullHeight}`}>
         <div className={styles.wrapper}>
           <div className={styles.input__position}>
             <CodeMirror
+              autoFocus
               className={styles.input__mirror}
               theme={CODEMIRROR_THEME_INPUT}
               value={reqValue}
@@ -60,12 +56,10 @@ export default function CodeEditor() {
               onChange={onChange}
             />
           </div>
-
           <button className={styles.editor__reqButton} onClick={requestHandler}>
             <Image src={PlayIcon} width={40} height={40} alt="Send request" />
           </button>
         </div>
-
         <Tools />
       </div>
 
@@ -78,7 +72,7 @@ export default function CodeEditor() {
           alt="The reply is in process"
         />
       ) : (
-        <Output value={resValue} />
+        <Output />
       )}
     </section>
   );
