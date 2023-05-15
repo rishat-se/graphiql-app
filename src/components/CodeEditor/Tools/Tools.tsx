@@ -16,7 +16,7 @@ function Tools() {
   const dispatch = useAppDispatch();
   const variables = useAppSelector((state) => state.editor.variables);
   const headers = useAppSelector((state) => state.editor.headers);
-  const [showTools, setShowTools] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const [mode, setMode] = useState<ToolsMode>(ToolsMode.Variables);
 
   const onChangeVariables = (value: string) => dispatch(setVariables(value));
@@ -24,12 +24,12 @@ function Tools() {
   const onChangeHeaders = (value: string) => dispatch(setHeaders(value));
 
   const setVariablesMode = () => {
-    setShowTools(true);
+    setIsOpen(true);
     setMode(ToolsMode.Variables);
   };
 
   const setHeadersMode = () => {
-    setShowTools(true);
+    setIsOpen(true);
     setMode(ToolsMode.Headers);
   };
 
@@ -38,7 +38,7 @@ function Tools() {
       <div>
         <button
           className={`${styles.tools__button} ${
-            showTools && mode === ToolsMode.Variables ? styles.tools__button_active : ''
+            isOpen && mode === ToolsMode.Variables ? styles.tools__button_active : ''
           }`}
           onClick={setVariablesMode}
         >
@@ -47,7 +47,7 @@ function Tools() {
 
         <button
           className={`${styles.tools__button} ${
-            showTools && mode === ToolsMode.Headers ? styles.tools__button_active : ''
+            isOpen && mode === ToolsMode.Headers ? styles.tools__button_active : ''
           }`}
           onClick={setHeadersMode}
         >
@@ -56,10 +56,10 @@ function Tools() {
 
         <button
           className={`${styles.tools__button} ${styles.tools__toggler}`}
-          onClick={() => setShowTools((prev) => !prev)}
+          onClick={() => setIsOpen((prev) => !prev)}
         >
           <Image
-            {...(showTools ? { className: styles.tools__toggler_hidden } : {})}
+            {...(isOpen ? { className: styles.tools__toggler_hidden } : {})}
             src={ArrowImg}
             width={16}
             height={16}
@@ -68,7 +68,7 @@ function Tools() {
         </button>
       </div>
 
-      {showTools && (
+      {isOpen && (
         <CodeMirror
           className={styles.tools__mirror}
           extensions={CODEMIRROR_EXTENSIONS}

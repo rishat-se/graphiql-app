@@ -1,15 +1,26 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-interface IEditorInitialState {
+interface IEditorState {
   reqValue: string;
   variables: string;
   headers: string;
 }
 
-const initialState: IEditorInitialState = {
+// interface IEditorTabsState {
+//   tabs: IEditorState[];
+// }
+
+const initialState: IEditorState = {
   reqValue: '',
   variables: '',
   headers: '',
+  // tabs: [
+  //   {
+  //     reqValue: '',
+  //     variables: '',
+  //     headers: '',
+  //   },
+  // ],
 };
 
 export const editorSlice = createSlice({
@@ -23,7 +34,21 @@ export const editorSlice = createSlice({
     setHeaders(state, action: PayloadAction<string>) {
       state.headers = action.payload;
     },
+
+    setReqValue(state, action: PayloadAction<string>) {
+      state.reqValue = action.payload;
+    },
+
+    // addTab(state) {
+    //   const { reqValue, variables, headers } = state;
+
+    //   state.tabs.push({ reqValue, variables, headers });
+
+    //   state.reqValue = '';
+    //   state.variables = '';
+    //   state.headers = '';
+    // },
   },
 });
 
-export const { setVariables, setHeaders } = editorSlice.actions;
+export const { setVariables, setHeaders, setReqValue } = editorSlice.actions;
