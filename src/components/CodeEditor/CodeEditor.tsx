@@ -10,6 +10,8 @@ import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import { setReqValue } from '@/store/slices/editorSlice';
 import { GraphQLClient } from 'graphql-request';
 import { API_BASE_LINK } from '@/constants';
+import Image from 'next/image';
+import EditorSpinnerGif from '../../../public/images/editor-spinner.gif';
 
 async function graphQLRequest(query: string, variables: string, headers: string) {
   const client = new GraphQLClient(API_BASE_LINK);
@@ -68,7 +70,13 @@ export default function CodeEditor() {
       </div>
 
       {loading ? (
-        <p style={{ textAlign: 'center', color: 'white' }}>Loading...</p>
+        <Image
+          className={styles.editor__loader}
+          src={EditorSpinnerGif}
+          width={80}
+          height={80}
+          alt="The reply is in process"
+        />
       ) : (
         <Output value={resValue} />
       )}

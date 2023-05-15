@@ -13,7 +13,7 @@
   font-size: 24px;
   font-family: $RMfont;
 
-  background-color: #132428c4;
+  background-color: #0e1a1c;
   border-radius: 5px;
 
   &__reqButton {
@@ -29,6 +29,11 @@
     &:active {
       opacity: 0.5;
     }
+  }
+
+  &__loader {
+    margin: 0 auto;
+    margin-top: 20px;
   }
 }
 
