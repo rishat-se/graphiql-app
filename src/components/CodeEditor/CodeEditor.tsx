@@ -6,8 +6,7 @@ import Tabs from './Tabs/Tabs';
 import Output from './Output/Output';
 import Tools from './Tools/Tools';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
-import { setReqValue, setResValue } from '@/store/slices/editorSlice';
-import { ClientError } from 'graphql-request';
+import { setInputValue, setOutputValues } from '@/store/slices/editorSlice';
 import Image from 'next/image';
 import EditorSpinnerGif from '../../../public/images/editor-spinner.gif';
 import PlayIcon from '../../../public/icons/play_23.svg';
@@ -15,29 +14,18 @@ import { graphQLRequest } from './CodeEditor.utils';
 
 export default function CodeEditor() {
   const dispatch = useAppDispatch();
-  const reqValue = useAppSelector((state) => state.editor.reqValue);
+  const inputValue = useAppSelector((state) => state.editor.input);
   const { variables, headers } = useAppSelector((state) => state.editor.tools);
   const [loading, setLoading] = useState<boolean>(false);
 
-  const onChange = (value: string) => dispatch(setReqValue(value));
+  const onChange = (value: string) => dispatch(setInputValue(value));
 
   const requestHandler = async () => {
-    try {
-      setLoading(true);
-      const data = await graphQLRequest(reqValue, variables, headers);
+    setLoading(true);
+    const output = await graphQLRequest(inputValue, variables, headers);
 
-      setResValue(JSON.stringify(data, undefined, 2));
-    } catch (error) {
-      if (error instanceof Error) {
-        if (error instanceof ClientError) {
-          dispatch(setResValue(JSON.stringify(error.response, undefined, 2)));
-        } else {
-          dispatch(setResValue(`// ${error.name}: ${error.message}`));
-        }
-      }
-    } finally {
-      setLoading(false);
-    }
+    dispatch(setOutputValues(output));
+    setLoading(false);
   };
 
   return (
@@ -50,7 +38,7 @@ export default function CodeEditor() {
               autoFocus
               className={styles.input__mirror}
               theme={CODEMIRROR_THEME_INPUT}
-              value={reqValue}
+              value={inputValue}
               height="100%"
               extensions={CODEMIRROR_EXTENSIONS}
               onChange={onChange}

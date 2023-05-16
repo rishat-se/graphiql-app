@@ -5,7 +5,8 @@ import styles from './Output.module.scss';
 import { useAppSelector } from '@/hooks/redux';
 
 function Output() {
-  const resValue = useAppSelector((state) => state.editor.resValue);
+  const { value: outputValue, time, gcdnCache } = useAppSelector((state) => state.editor.output);
+  const isShowDetails = time && gcdnCache;
 
   return (
     <div className={styles.output}>
@@ -13,7 +14,7 @@ function Output() {
         <CodeMirror
           className={styles.output__mirror}
           theme={CODEMIRROR_THEME_OUTPUT}
-          value={resValue}
+          value={outputValue}
           extensions={CODEMIRROR_EXTENSIONS}
           editable={false}
           height="100%"
@@ -21,9 +22,13 @@ function Output() {
         />
       </div>
 
-      {/* <div className={styles.output__details}>
-        <p>MISS 324ms</p>
-      </div> */}
+      {isShowDetails && (
+        <div className={styles.output__details}>
+          <p>
+            {gcdnCache} {time}
+          </p>
+        </div>
+      )}
     </div>
   );
 }

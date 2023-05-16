@@ -2,19 +2,31 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { ToolsMode } from '@/constants';
 
 interface IEditorState {
-  reqValue: string;
-  resValue: string;
-  tools: {
-    isOpen: boolean;
-    mode: ToolsMode;
-    variables: string;
-    headers: string;
-  };
+  input: string;
+  output: IEditorOutputState;
+  tools: IEditorToolsState;
+}
+
+interface IEditorOutputState {
+  value: string;
+  time: string | undefined;
+  gcdnCache: string | undefined;
+}
+
+interface IEditorToolsState {
+  isOpen: boolean;
+  mode: ToolsMode;
+  variables: string;
+  headers: string;
 }
 
 const initialState: IEditorState = {
-  reqValue: '',
-  resValue: '',
+  input: '',
+  output: {
+    value: '',
+    time: undefined,
+    gcdnCache: undefined,
+  },
   tools: {
     isOpen: false,
     mode: ToolsMode.Variables,
@@ -27,12 +39,12 @@ export const editorSlice = createSlice({
   name: 'editor',
   initialState,
   reducers: {
-    setReqValue(state, action: PayloadAction<string>) {
-      state.reqValue = action.payload;
+    setInputValue(state, action: PayloadAction<string>) {
+      state.input = action.payload;
     },
 
-    setResValue(state, action: PayloadAction<string>) {
-      state.resValue = action.payload;
+    setOutputValues(state, action: PayloadAction<IEditorOutputState>) {
+      state.output = action.payload;
     },
 
     setVariables(state, action: PayloadAction<string>) {
@@ -53,5 +65,11 @@ export const editorSlice = createSlice({
   },
 });
 
-export const { setVariables, setHeaders, setReqValue, setToolsIsOpen, setToolsMode, setResValue } =
-  editorSlice.actions;
+export const {
+  setVariables,
+  setHeaders,
+  setInputValue,
+  setToolsIsOpen,
+  setToolsMode,
+  setOutputValues,
+} = editorSlice.actions;
