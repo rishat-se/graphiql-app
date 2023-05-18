@@ -1,4 +1,4 @@
 import { createContext } from 'react';
-import { NodeType } from '@/components/DocExplorer/DocExplorer';
+import { GraphQLNamedType } from 'graphql';
 
-export const DocExplorerContext = createContext<((node: NodeType) => void) | null>(null);
+export const DocExplorerContext = createContext<((node: GraphQLNamedType) => void) | null>(null);
