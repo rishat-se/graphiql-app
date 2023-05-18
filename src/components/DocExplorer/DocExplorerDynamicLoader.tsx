@@ -1,10 +1,10 @@
 import dynamic from 'next/dynamic';
 import { Suspense } from 'react';
-export const SchemaLoader = dynamic(
+
+export const SchemaFetcher = dynamic(
   async () => {
-    //remove
-    await new Promise((resolve) => setTimeout(resolve, 3000));
-    return import('@/components/SchemaLoader/SchemaLoader');
+    // await new Promise((resolve) => setTimeout(resolve, 3000));
+    return import('@/components/DocExplorer/SchemaFetcher');
   },
   {
     loading: () => <p>Dynamic Module Loading...</p>,
@@ -12,10 +12,10 @@ export const SchemaLoader = dynamic(
   }
 );
 
-export function SchemaDynamicLoader() {
+export function DocExplorerDynamicLoader() {
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <SchemaLoader />
+      <SchemaFetcher />
     </Suspense>
   );
 }
