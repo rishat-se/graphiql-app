@@ -1,9 +1,12 @@
 import Layout from '@/components/Layout/Layout';
+import { useAppSelector } from '@/hooks/redux';
 import styles from '@/styles/home.module.scss';
 import Head from 'next/head';
 import Link from 'next/link';
 
 export default function Home() {
+  const { isAuth } = useAppSelector((state) => state.authReducer);
+  const authrized = isAuth === true;
   return (
     <>
       <Head>
@@ -18,8 +21,8 @@ export default function Home() {
           <p className={styles.description}>
             The app is created as a learning project and may not be used for commercial purposes!
           </p>
-          <Link className={styles.link} href="/auth">
-            Try it out
+          <Link className={styles.link} href={authrized ? '/main' : '/signup'}>
+            {authrized ? 'Go to editor' : 'Try it out'}
           </Link>
         </div>
       </Layout>

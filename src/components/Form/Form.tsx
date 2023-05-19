@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { SubmitHandler } from 'react-hook-form/dist/types';
 import Eye from '../../../public/icons/eye.svg';
+import ClosedEye from '../../../public/icons/eyeclosed.svg';
 import ErrorModal from '../ErrorModal/ErrorModal';
 import styles from '../LoginForm/form.module.scss';
 
@@ -61,8 +62,11 @@ export default function Form() {
           <span>Enter your email</span>
           <input
             {...register('email', {
-              required: true,
-              pattern: { value: emailPattern, message: 'This field is required.It must be email' },
+              required: 'This field is required.It must be valid email',
+              pattern: {
+                value: emailPattern,
+                message: 'This field is required.It must be valid email',
+              },
             })}
             className={styles.input}
             type="text"
@@ -92,7 +96,13 @@ export default function Form() {
               id="password"
             />
             <button onClick={visiblePassword} className={styles.button} type="button">
-              <Image src={Eye} alt="eye" width={50} height={35} priority></Image>
+              <Image
+                src={!visible ? Eye : ClosedEye}
+                alt="eye"
+                width={50}
+                height={25}
+                priority
+              ></Image>
             </button>
           </div>
           {errors.password && <p className={styles.error}>{errors.password.message}</p>}
