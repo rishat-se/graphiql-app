@@ -11,7 +11,9 @@ import { ToolsMode } from '@/constants';
 function Tools() {
   const editorRef = useRef<ReactCodeMirrorRef>(null);
   const dispatch = useAppDispatch();
-  const { variables, headers, isOpen, mode } = useAppSelector((state) => state.editor.tools);
+  const { variables, headers, isOpen, mode } = useAppSelector(
+    (state) => state.editor.current.tools
+  );
 
   const onChangeVariables = (value: string) => dispatch(setVariables(value));
 

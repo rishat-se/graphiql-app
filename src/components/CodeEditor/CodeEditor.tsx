@@ -1,6 +1,6 @@
 import styles from './CodeEditor.module.scss';
-import React, { useState } from 'react';
-import CodeMirror from '@uiw/react-codemirror';
+import React, { useRef, useState } from 'react';
+import CodeMirror, { ReactCodeMirrorRef } from '@uiw/react-codemirror';
 import { CODEMIRROR_THEME_INPUT, CODEMIRROR_EXTENSIONS } from '@/constants/codeMirrorSettings';
 import Tabs from './Tabs/Tabs';
 import Output from './Output/Output';
@@ -14,9 +14,10 @@ import { graphQLRequest } from './CodeEditor.utils';
 
 export default function CodeEditor() {
   const dispatch = useAppDispatch();
-  const inputValue = useAppSelector((state) => state.editor.input);
-  const { variables, headers } = useAppSelector((state) => state.editor.tools);
+  const inputValue = useAppSelector((state) => state.editor.current.input);
+  const { variables, headers } = useAppSelector((state) => state.editor.current.tools);
   const [loading, setLoading] = useState<boolean>(false);
+  const editorRef = useRef<ReactCodeMirrorRef>(null);
 
   const onChange = (value: string) => dispatch(setInputValue(value));
 
@@ -30,11 +31,12 @@ export default function CodeEditor() {
 
   return (
     <section className={styles.editor}>
-      <Tabs />
-      <div className={`${styles.input} ${styles.input_fullHeight}`}>
+      <Tabs inputEditorRef={editorRef} />
+      <div className={styles.input}>
         <div className={styles.wrapper}>
           <div className={styles.input__position}>
             <CodeMirror
+              ref={editorRef}
               autoFocus
               className={styles.input__mirror}
               theme={CODEMIRROR_THEME_INPUT}

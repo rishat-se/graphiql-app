@@ -20,7 +20,7 @@ const CODEMIRROR_STYLES: Omit<CreateThemeOptions, 'settings'> = {
     { tag: [t.string, t.special(t.brace)], color: '#5c6166' },
     { tag: t.number, color: 'rgba(73, 193, 43, 1)' },
     { tag: t.bool, color: 'rgba(73, 193, 43, 1)' },
-    { tag: t.null, color: '#rgba(73, 193, 43, 1)' },
+    { tag: t.null, color: 'rgba(73, 193, 43, 1)' },
     { tag: t.keyword, color: 'rgba(73, 193, 43, 1)' },
     { tag: t.operator, color: 'rgba(73, 193, 43, 1)' },
     { tag: t.className, color: 'rgba(73, 193, 43, 1)' },

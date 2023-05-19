@@ -3,7 +3,7 @@
 .editor {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: 36px 1fr;
+  grid-template-rows: min-content 1fr;
   grid-auto-flow: column;
   gap: 10px;
 
@@ -39,6 +39,7 @@
 
 .input {
   grid-column: 1 / 2;
+  grid-row: span 2;
 
   display: flex;
   flex-direction: column;
@@ -47,10 +48,6 @@
 
   background-color: #112429;
   border-radius: 5px;
-
-  &_fullHeight {
-    grid-row: 1 / 3;
-  }
 
   &__position {
     position: relative;
