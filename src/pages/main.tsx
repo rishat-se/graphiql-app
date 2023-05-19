@@ -1,6 +1,8 @@
 import Layout from '@/components/Layout/Layout';
 import styles from '@/styles/main.module.scss';
 import Head from 'next/head';
+import ControlsPanel from '@/components/ControlsPanel/ControlsPanel';
+import CodeEditor from '@/components/CodeEditor/CodeEditor';
 
 export default function Main() {
   return (
@@ -8,22 +10,13 @@ export default function Main() {
       <Head>
         <title>GraphiQL : Sandbox</title>
       </Head>
+
       <Layout>
-        <div className={styles.container}>
-          <div>
-            <label htmlFor="request">
-              <textarea name="request" rows={30} cols={50} defaultValue="Some code"></textarea>
-            </label>
-          </div>
-          <button className={styles.button} type="button">
-            send req
-          </button>
-          <div>
-            <label htmlFor="request">
-              <textarea name="request" rows={30} cols={50} defaultValue="Some code"></textarea>
-            </label>
-          </div>
-        </div>
+        <main className={styles.container}>
+          <ControlsPanel />
+
+          <CodeEditor />
+        </main>
       </Layout>
     </>
   );
