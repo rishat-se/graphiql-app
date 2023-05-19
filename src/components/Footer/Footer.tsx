@@ -4,7 +4,7 @@ import { devsArray } from '@/constants/devs';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import RssLogo from '../../../public/icons/method-draw-image.svg';
+import RssLogo from '../../../public/icons/vectorpaint.svg';
 
 export default function Footer() {
   const { pathname } = useRouter();
@@ -18,8 +18,8 @@ export default function Footer() {
           <Image src={RssLogo} width={70} height={40} alt="course logo" />
         </Link>
       </div>
-      <p className={styles.year}>2023</p>
       {rootRoute ? <DevsGits devs={devsArray.devs} /> : null}
+      <p className={styles.year}>2023</p>
     </footer>
   );
 }

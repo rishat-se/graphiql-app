@@ -1,5 +1,6 @@
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import { authSlice } from '@/store/slices/userSlice';
+import { getAuth } from 'firebase/auth';
 import Link from 'next/link';
 import styles from './navigation.module.scss';
 
@@ -9,7 +10,9 @@ export default function Navbar() {
   const dispatch = useAppDispatch();
   const notAuthorized = isAuth === false;
   const sign = () => {
+    const auth = getAuth();
     dispatch(singOut());
+    auth.signOut();
   };
   return (
     <nav className={styles.nav}>

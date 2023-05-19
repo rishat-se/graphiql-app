@@ -1,44 +1,57 @@
 import { IFormData } from '@/constants/form-types';
 import { emailPattern, passwordPattern } from '@/constants/regexps';
-import { useAppDispatch, useAppSelector } from '@/hooks/redux';
+import { useAppDispatch } from '@/hooks/redux';
 import { authSlice } from '@/store/slices/userSlice';
 import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
-import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import Image from 'next/image';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { SubmitHandler } from 'react-hook-form/dist/types';
-import styles from './form.module.scss';
+import Eye from '../../../public/icons/eye.svg';
+import ErrorModal from '../ErrorModal/ErrorModal';
+import styles from '../LoginForm/form.module.scss';
 
 export default function Form() {
-  const { isAuth } = useAppSelector((state) => state.authReducer);
   const { signIn } = authSlice.actions;
+  const [fbError, setFbError] = useState<string | boolean>(false);
+  const [visible, setVisible] = useState<boolean>(false);
   const dispatch = useAppDispatch();
-  const authorized = isAuth === true;
-  const router = useRouter();
+
   const {
     register,
     handleSubmit,
-    formState: { isSubmitSuccessful, errors },
+    formState: { errors },
   } = useForm<IFormData>();
+  const closeModal = () => {
+    setFbError(false);
+  };
+
+  const visiblePassword = () => {
+    setVisible(!visible);
+  };
 
   const onSubmit: SubmitHandler<IFormData> = async (data) => {
-    const auth = getAuth();
-    const createdUser = await createUserWithEmailAndPassword(auth, data.email, data.password);
-    dispatch(
-      signIn({
-        isAuth: true,
-        email: createdUser.user.email,
-        token: createdUser.user.refreshToken,
-        id: createdUser.user.uid,
-      })
-    );
+    try {
+      const auth = getAuth();
+      const createdUser = await createUserWithEmailAndPassword(auth, data.email, data.password);
+      dispatch(
+        signIn({
+          isAuth: true,
+          email: createdUser.user.email,
+        })
+      );
+    } catch (e) {
+      if (e instanceof Error) {
+        setFbError(e.message);
+      }
+    }
   };
 
   useEffect(() => {
-    if (authorized) {
-      router.push('/main');
-    }
-  }, [isAuth]);
+    setTimeout(() => {
+      setFbError(false);
+    }, 5500);
+  }, [fbError]);
 
   return (
     <div className={styles.container}>
@@ -49,33 +62,51 @@ export default function Form() {
           <input
             {...register('email', {
               required: true,
-              pattern: emailPattern,
+              pattern: { value: emailPattern, message: 'This field is required.It must be email' },
             })}
             className={styles.input}
-            type="email"
+            type="text"
             placeholder="Some email"
             name="email"
             id="email"
           />
+          {errors.email && <p className={styles.error}>{errors.email.message}</p>}
         </label>
         <label className={styles.label} htmlFor="password">
           <span>Enter your password</span>
-          <input
-            {...register('password', {
-              required: true,
-              pattern: passwordPattern,
-            })}
-            className={styles.input}
-            type="password"
-            placeholder="Some password"
-            name="password"
-            id="password"
-          />
+          <div className={styles.password}>
+            <input
+              {...register('password', {
+                required:
+                  'It will be minimum 8 symbols, at least one letter, one digit, one special character.',
+                pattern: {
+                  value: passwordPattern,
+                  message:
+                    'It will be minimum 8 symbols, at least one letter, one digit, one special character.',
+                },
+              })}
+              className={styles.input}
+              type={visible ? 'text' : 'password'}
+              placeholder="Some password"
+              name="password"
+              id="password"
+            />
+            <button onClick={visiblePassword} className={styles.button} type="button">
+              <Image src={Eye} alt="eye" width={50} height={35} priority></Image>
+            </button>
+          </div>
+          {errors.password && <p className={styles.error}>{errors.password.message}</p>}
         </label>
         <div className={styles.submit_container}>
           <input type="submit" className={styles.submit} value="Sign up" />
         </div>
       </form>
+      {fbError ? (
+        <ErrorModal
+          toggle={closeModal}
+          text="User with this email adress already exists,please enter another email =)"
+        />
+      ) : null}
     </div>
   );
 }
