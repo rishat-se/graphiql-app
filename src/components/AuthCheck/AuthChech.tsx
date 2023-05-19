@@ -21,11 +21,12 @@ export default function AuthCheck({ children }: { children: React.ReactNode }) {
         setIsLoading(false);
       }
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (isLoading) {
     return <Loading />;
   }
 
-  return children;
+  return <>{children}</>;
 }
