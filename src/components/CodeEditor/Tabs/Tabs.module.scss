@@ -10,8 +10,16 @@
   width: 100%;
   min-height: 36px;
 
+  @media (max-width: 768px) {
+    grid-column: 1 / 2;
+  }
+
   &_active {
     grid-column: 1 / 3;
+
+    @media (max-width: 768px) {
+      grid-column: 1 / 2;
+    }
   }
 
   &__list {
@@ -36,14 +44,27 @@
     user-select: none;
     cursor: pointer;
 
+    @media (max-width: 768px) {
+      font-size: 20px;
+    }
+
     &:hover {
       background-color: #0f1e23;
+
+      .tabs__delete {
+        opacity: 1;
+      }
     }
 
     &_active {
       background-color: #112429;
+
       &:hover {
         background-color: #112429;
+      }
+
+      .tabs__delete {
+        opacity: 1;
       }
     }
   }
@@ -59,6 +80,8 @@
     background-color: transparent;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
+
+    opacity: 0;
 
     &_img {
       transform: rotate(45deg);
@@ -92,6 +115,10 @@
     &:active {
       opacity: 0.7;
     }
+
+    @media (max-width: 768px) {
+      margin-right: 0;
+    }
   }
 
   &__api {
@@ -103,6 +130,10 @@
     &:hover {
       color: $violet;
       text-shadow: $textShadowViolet;
+    }
+
+    @media (max-width: 768px) {
+      display: none;
     }
   }
 }

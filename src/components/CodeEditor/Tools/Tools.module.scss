@@ -35,6 +35,10 @@
         text-shadow: $textShadowRed;
       }
     }
+
+    @media (max-width: 768px) {
+      font-size: 20px;
+    }
   }
 
   &__toggler {
@@ -53,5 +57,9 @@
 
   &__mirror {
     font-size: 16px;
+
+    @media (max-width: 768px) {
+      font-size: 14px;
+    }
   }
 }
