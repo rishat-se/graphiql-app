@@ -24,6 +24,7 @@ function Tabs({ inputEditorRef }: TabsProps) {
   }, [dispatch]);
 
   const addNewTabHandler = () => {
+    dispatch(saveCurrentTab());
     dispatch(addNewTab());
     inputEditorRef.current?.view?.focus();
   };

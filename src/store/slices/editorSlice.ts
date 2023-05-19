@@ -78,7 +78,7 @@ export const editorSlice = createSlice({
         state.tabs = [state.current, newTab];
         state.current = newTab;
       } else {
-        state.tabs = [...state.tabs.slice(0, -1), state.current, newTab];
+        state.tabs = [...state.tabs, newTab];
         state.current = newTab;
       }
     },
@@ -100,6 +100,8 @@ export const editorSlice = createSlice({
     },
 
     saveCurrentTab(state) {
+      if (state.tabs.length === 0) return;
+
       state.tabs = state.tabs.map((tab) => {
         if (state.current.id === tab.id) {
           return { ...state.current };
