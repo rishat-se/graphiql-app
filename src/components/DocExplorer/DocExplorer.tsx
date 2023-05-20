@@ -5,6 +5,7 @@ import { DocExplorerContext } from '@/components/DocExplorer/Context/DocExplorer
 import AllSchemaTypesView from '@/components/DocExplorer/NodeViews/AllSchemaTypesView';
 import BackLink from '@/components/DocExplorer/NodeViews/Helpers/BackLink';
 import OueryView from '@/components/DocExplorer/NodeViews/ObjectView';
+import FieldView from '@/components/DocExplorer/NodeViews/FieldView';
 
 type DocExplorerProps = {
   schema: DocGraphQLSchema;
@@ -41,6 +42,7 @@ export default function DocExplorer({ schema }: DocExplorerProps) {
           <AllSchemaTypesView node={curNode as DocGraphQLSchema} />
         )}
         {curNodeType === 'GraphQLObjectType' && <OueryView node={curNode as GraphQLObjectType} />}
+        {curNodeType === 'DocGraphQLField' && <FieldView node={curNode as DocGraphQLField} />}
       </DocExplorerContext.Provider>
     </div>
   );
