@@ -4,6 +4,7 @@ import {
   GraphQLInputObjectType,
   GraphQLNamedType,
   GraphQLObjectType,
+  GraphQLScalarType,
   GraphQLSchema,
 } from 'graphql/type';
 import RootView from '@/components/DocExplorer/NodeViews/RootView';
@@ -12,6 +13,7 @@ import AllSchemaTypesView from '@/components/DocExplorer/NodeViews/AllSchemaType
 import BackLink from '@/components/DocExplorer/NodeViews/Helpers/BackLink';
 import OueryView from '@/components/DocExplorer/NodeViews/ObjectView';
 import FieldView from '@/components/DocExplorer/NodeViews/FieldView';
+import ScalarView from '@/components/DocExplorer/NodeViews/ScalarView';
 
 type DocExplorerProps = {
   schema: DocGraphQLSchema;
@@ -52,6 +54,7 @@ export default function DocExplorer({ schema }: DocExplorerProps) {
           <OueryView node={curNode as GraphQLInputObjectType} />
         )}
         {curNodeType === 'DocGraphQLField' && <FieldView node={curNode as DocGraphQLField} />}
+        {curNodeType === 'GraphQLScalarType' && <ScalarView node={curNode as GraphQLScalarType} />}
       </DocExplorerContext.Provider>
     </div>
   );
