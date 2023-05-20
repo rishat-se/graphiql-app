@@ -1,5 +1,11 @@
 import { useState } from 'react';
-import { GraphQLField, GraphQLNamedType, GraphQLObjectType, GraphQLSchema } from 'graphql/type';
+import {
+  GraphQLField,
+  GraphQLInputObjectType,
+  GraphQLNamedType,
+  GraphQLObjectType,
+  GraphQLSchema,
+} from 'graphql/type';
 import RootView from '@/components/DocExplorer/NodeViews/RootView';
 import { DocExplorerContext } from '@/components/DocExplorer/Context/DocExplorerContext';
 import AllSchemaTypesView from '@/components/DocExplorer/NodeViews/AllSchemaTypesView';
@@ -42,6 +48,9 @@ export default function DocExplorer({ schema }: DocExplorerProps) {
           <AllSchemaTypesView node={curNode as DocGraphQLSchema} />
         )}
         {curNodeType === 'GraphQLObjectType' && <OueryView node={curNode as GraphQLObjectType} />}
+        {curNodeType === 'GraphQLInputObjectType' && (
+          <OueryView node={curNode as GraphQLInputObjectType} />
+        )}
         {curNodeType === 'DocGraphQLField' && <FieldView node={curNode as DocGraphQLField} />}
       </DocExplorerContext.Provider>
     </div>

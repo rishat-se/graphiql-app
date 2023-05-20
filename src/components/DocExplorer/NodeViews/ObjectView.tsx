@@ -1,10 +1,10 @@
-import { GraphQLObjectType } from 'graphql/type';
+import { GraphQLInputObjectType, GraphQLObjectType } from 'graphql/type';
 import Field from '@/components/DocExplorer/NodeViews/Helpers/Field';
 import { DocGraphQLField } from '../DocExplorer';
 import { ObjMap } from 'graphql/jsutils/ObjMap';
 
 type QueryViewProps = {
-  node: GraphQLObjectType;
+  node: GraphQLObjectType | GraphQLInputObjectType;
 };
 
 export type DocGraphQLFieldMap = ObjMap<DocGraphQLField>;
