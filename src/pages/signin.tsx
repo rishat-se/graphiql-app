@@ -10,7 +10,7 @@ export default function Auth() {
   return (
     <>
       <Head>
-        <title>GraphiQL : Authorization</title>
+        <title>GraphiQL : Sign in</title>
       </Head>
       <Layout>{notAuthrized ? <LoginForm /> : <Loading />}</Layout>
     </>

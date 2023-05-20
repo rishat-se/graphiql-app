@@ -36,10 +36,11 @@ export default function AuthCheck({ children }: { children: React.ReactNode }) {
     getAuth().onAuthStateChanged((user) => {
       if (user) {
         dispatch(signIn({ isAuth: true, email: user.email }));
-        router.push(pathname === ('/signin' && '/signup') ? '/main' : pathname);
+        router.push(pathname !== '/' ? '/main' : pathname);
         setIsLoading(false);
       } else {
         setIsLoading(false);
+        dispatch(singOut());
         router.push(pathname === '/main' ? '/' : pathname);
       }
     });
