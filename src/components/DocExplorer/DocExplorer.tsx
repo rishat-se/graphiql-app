@@ -11,7 +11,7 @@ import {
 import RootView from '@/components/DocExplorer/NodeViews/RootView';
 import { DocExplorerContext } from '@/components/DocExplorer/Context/DocExplorerContext';
 import AllSchemaTypesView from '@/components/DocExplorer/NodeViews/AllSchemaTypesView';
-import BackLink from '@/components/DocExplorer/NodeViews/Helpers/BackLink';
+import BackLink from '@/components/DocExplorer/NodeViews/Common/BackLink';
 import OueryView from '@/components/DocExplorer/NodeViews/ObjectView';
 import FieldView from '@/components/DocExplorer/NodeViews/FieldView';
 import ScalarView from '@/components/DocExplorer/NodeViews/ScalarView';
@@ -21,7 +21,7 @@ type DocExplorerProps = {
   schema: DocGraphQLSchema;
 };
 
-export type NodeType = DocGraphQLSchema | GraphQLNamedType | DocGraphQLField;
+export type DocNode = DocGraphQLSchema | GraphQLNamedType | DocGraphQLField;
 
 export type DocGraphQLSchema = GraphQLSchema & { name: string };
 
@@ -30,12 +30,12 @@ export type DocGraphQLField = GraphQLField<unknown, unknown> & {
 };
 
 export default function DocExplorer({ schema }: DocExplorerProps) {
-  const [docHistory, setDocHistory] = useState<NodeType[]>([schema]);
+  const [docHistory, setDocHistory] = useState<DocNode[]>([schema]);
   console.log(docHistory);
   const curNode = docHistory[docHistory.length - 1];
   const curNodeType = curNode[Symbol.toStringTag];
 
-  const setCurNode = (node: NodeType) => {
+  const setCurNode = (node: DocNode) => {
     setDocHistory([...docHistory, node]);
   };
 

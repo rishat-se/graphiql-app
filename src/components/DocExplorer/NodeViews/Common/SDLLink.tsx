@@ -1,8 +1,8 @@
 import useSetCurNode from '@/components/DocExplorer/Hooks/useSetCurNode';
-import { NodeType } from '@/components/DocExplorer/DocExplorer';
+import { DocNode } from '@/components/DocExplorer/DocExplorer';
 
 type SchemaLinkProps = {
-  type: NodeType;
+  type: DocNode;
   typeName: string;
 };
 

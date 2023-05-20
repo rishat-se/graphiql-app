@@ -1,5 +1,5 @@
 import { GraphQLInputObjectType, GraphQLObjectType } from 'graphql/type';
-import Field from '@/components/DocExplorer/NodeViews/Helpers/Field';
+import Field from '@/components/DocExplorer/NodeViews/Common/Field';
 import { DocGraphQLField } from '../DocExplorer';
 import { ObjMap } from 'graphql/jsutils/ObjMap';
 

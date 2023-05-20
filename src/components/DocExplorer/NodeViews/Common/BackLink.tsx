@@ -1,7 +1,7 @@
-import { NodeType } from '../../DocExplorer';
+import { DocNode } from '../../DocExplorer';
 
 type BackHistoryProps = {
-  history: NodeType[];
+  history: DocNode[];
   goBack: () => void;
 };
 

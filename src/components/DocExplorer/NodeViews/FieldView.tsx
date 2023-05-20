@@ -1,5 +1,5 @@
-import SDLLink from './Helpers/SDLLink';
-import { unwrapType } from '@/components/DocExplorer/NodeViews/Helpers/docExplorerHelpers';
+import SDLLink from './Common/SDLLink';
+import { unwrapType } from '@/components/DocExplorer/Helpers/docExplorerHelpers';
 import { DocGraphQLField } from '../DocExplorer';
 
 type FieldViewProps = {

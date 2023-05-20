@@ -1,4 +1,4 @@
-import SDLLink from '@/components/DocExplorer/NodeViews/Helpers/SDLLink';
+import SDLLink from '@/components/DocExplorer/NodeViews/Common/SDLLink';
 import { DocGraphQLSchema } from '@/components/DocExplorer/DocExplorer';
 
 type AllTypesViewProps = {

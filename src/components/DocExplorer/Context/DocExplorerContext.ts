@@ -1,4 +1,4 @@
 import { createContext } from 'react';
-import { NodeType } from '../DocExplorer';
+import { DocNode } from '../DocExplorer';
 
-export const DocExplorerContext = createContext<((node: NodeType) => void) | null>(null);
+export const DocExplorerContext = createContext<((node: DocNode) => void) | null>(null);
