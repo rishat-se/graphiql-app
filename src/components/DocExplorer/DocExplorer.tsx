@@ -7,6 +7,7 @@ import {
   GraphQLObjectType,
   GraphQLScalarType,
   GraphQLSchema,
+  GraphQLUnionType,
 } from 'graphql/type';
 import RootView from '@/components/DocExplorer/NodeViews/RootView';
 import { DocExplorerContext } from '@/components/DocExplorer/Context/DocExplorerContext';
@@ -16,6 +17,7 @@ import OueryView from '@/components/DocExplorer/NodeViews/ObjectView';
 import FieldView from '@/components/DocExplorer/NodeViews/FieldView';
 import ScalarView from '@/components/DocExplorer/NodeViews/ScalarView';
 import EnumView from './NodeViews/EnumView';
+import UnionView from './NodeViews/UnionView';
 
 type DocExplorerProps = {
   schema: DocGraphQLSchema;
@@ -58,6 +60,7 @@ export default function DocExplorer({ schema }: DocExplorerProps) {
         {curNodeType === 'DocGraphQLField' && <FieldView node={curNode as DocGraphQLField} />}
         {curNodeType === 'GraphQLScalarType' && <ScalarView node={curNode as GraphQLScalarType} />}
         {curNodeType === 'GraphQLEnumType' && <EnumView node={curNode as GraphQLEnumType} />}
+        {curNodeType === 'GraphQLUnionType' && <UnionView node={curNode as GraphQLUnionType} />}
       </DocExplorerContext.Provider>
     </div>
   );
