@@ -1,8 +1,8 @@
-import { GraphQLSchema } from 'graphql/type';
-import SDLLink from './Helpers/SDLLink';
+import SDLLink from '@/components/DocExplorer/NodeViews/Helpers/SDLLink';
+import { DocGraphQLSchema } from '@/components/DocExplorer/DocExplorer';
 
 type AllTypesViewProps = {
-  node: GraphQLSchema;
+  node: DocGraphQLSchema;
 };
 
 export default function AllTypesView({ node }: AllTypesViewProps) {

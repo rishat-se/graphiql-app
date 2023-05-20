@@ -1,25 +1,30 @@
 import { useState } from 'react';
-import { GraphQLNamedType, GraphQLSchema } from 'graphql/type';
+import { GraphQLField, GraphQLNamedType, GraphQLObjectType, GraphQLSchema } from 'graphql/type';
 import RootView from '@/components/DocExplorer/NodeViews/RootView';
 import { DocExplorerContext } from '@/components/DocExplorer/Context/DocExplorerContext';
 import AllSchemaTypesView from '@/components/DocExplorer/NodeViews/AllSchemaTypesView';
 import BackLink from '@/components/DocExplorer/NodeViews/Helpers/BackLink';
+import OueryView from '@/components/DocExplorer/NodeViews/ObjectView';
 
 type DocExplorerProps = {
-  schema: DocSchema;
+  schema: DocGraphQLSchema;
 };
 
-export type NodeType = DocSchema | GraphQLNamedType;
+export type NodeType = DocGraphQLSchema | GraphQLNamedType | DocGraphQLField;
 
-export type DocSchema = GraphQLSchema & { name: string };
+export type DocGraphQLSchema = GraphQLSchema & { name: string };
+
+export type DocGraphQLField = GraphQLField<unknown, unknown> & {
+  get [Symbol.toStringTag](): string;
+};
 
 export default function DocExplorer({ schema }: DocExplorerProps) {
   const [docHistory, setDocHistory] = useState<NodeType[]>([schema]);
-
+  console.log(docHistory);
   const curNode = docHistory[docHistory.length - 1];
   const curNodeType = curNode[Symbol.toStringTag];
 
-  const setCurNode = (node: GraphQLNamedType) => {
+  const setCurNode = (node: NodeType) => {
     setDocHistory([...docHistory, node]);
   };
 
@@ -31,11 +36,12 @@ export default function DocExplorer({ schema }: DocExplorerProps) {
     <div>
       <DocExplorerContext.Provider value={setCurNode}>
         <BackLink history={docHistory} goBack={goBack} />
-        {curNodeType === 'GraphQLSchema' && <RootView node={curNode as GraphQLSchema} />}
-        {curNodeType === 'GraphQLSchema' && <AllSchemaTypesView node={curNode as GraphQLSchema} />}
+        {curNodeType === 'GraphQLSchema' && <RootView node={curNode as DocGraphQLSchema} />}
+        {curNodeType === 'GraphQLSchema' && (
+          <AllSchemaTypesView node={curNode as DocGraphQLSchema} />
+        )}
+        {curNodeType === 'GraphQLObjectType' && <OueryView node={curNode as GraphQLObjectType} />}
       </DocExplorerContext.Provider>
     </div>
   );
 }
-
-// {/* {curGraph._fields[field].type[Symbol.toStringTag]} */}

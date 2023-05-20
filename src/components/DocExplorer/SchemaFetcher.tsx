@@ -2,7 +2,7 @@ import { apiURL } from '@/constants/api';
 import { GraphQLClient } from 'graphql-request';
 import useSWR from 'swr';
 import { IntrospectionQuery, buildClientSchema, getIntrospectionQuery } from 'graphql';
-import DocExplorer, { DocSchema } from '@/components//DocExplorer/DocExplorer';
+import DocExplorer, { DocGraphQLSchema } from '@/components//DocExplorer/DocExplorer';
 
 const introQuery = getIntrospectionQuery();
 
@@ -16,7 +16,7 @@ const fetcher = async (query: string) => {
 export default function SchemaFetcher() {
   const { data } = useSWR(introQuery, fetcher, { suspense: true });
 
-  const docSchema = buildClientSchema(data as IntrospectionQuery) as DocSchema;
+  const docSchema = buildClientSchema(data as IntrospectionQuery) as DocGraphQLSchema;
 
   docSchema.name = 'Docs';
 
