@@ -12,7 +12,7 @@ export default function AuthCheck({ children }: { children: React.ReactNode }) {
   const { signIn, singOut } = authSlice.actions;
   const dispatch = useAppDispatch();
   const router = useRouter();
-  const { pathname, route, asPath } = useRouter();
+  const { pathname } = useRouter();
 
   //experimental feature
   const tokenTest = async () => {
