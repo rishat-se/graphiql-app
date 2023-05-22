@@ -1,7 +1,5 @@
 import { IFormData } from '@/constants/form-types';
 import { emailPattern, passwordPattern } from '@/constants/regexps';
-import { useAppDispatch } from '@/hooks/redux';
-import { authSlice } from '@/store/slices/userSlice';
 import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
@@ -13,10 +11,8 @@ import ErrorModal from '../ErrorModal/ErrorModal';
 import styles from '../LoginForm/form.module.scss';
 
 export default function Form() {
-  const { signIn } = authSlice.actions;
   const [fbError, setFbError] = useState<string | boolean>(false);
   const [visible, setVisible] = useState<boolean>(false);
-  const dispatch = useAppDispatch();
 
   const {
     register,
@@ -34,13 +30,7 @@ export default function Form() {
   const onSubmit: SubmitHandler<IFormData> = async (data) => {
     try {
       const auth = getAuth();
-      const createdUser = await createUserWithEmailAndPassword(auth, data.email, data.password);
-      dispatch(
-        signIn({
-          isAuth: true,
-          email: createdUser.user.email,
-        })
-      );
+      await createUserWithEmailAndPassword(auth, data.email, data.password);
     } catch (e) {
       if (e instanceof Error) {
         setFbError(e.message);

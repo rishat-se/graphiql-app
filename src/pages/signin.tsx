@@ -7,6 +7,7 @@ import Head from 'next/head';
 export default function Auth() {
   const { isAuth } = useAppSelector((state) => state.authReducer);
   const notAuthrized = isAuth === false;
+
   return (
     <>
       <Head>

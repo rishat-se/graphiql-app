@@ -13,13 +13,13 @@ export default function Footer() {
 
   return (
     <footer className={rootRoute ? styles.footer : styles.special}>
-      <div>
+      <div className={styles.logo}>
         <Link href="https://rs.school/react/">
           <Image src={RssLogo} width={70} height={40} alt="course logo" />
         </Link>
       </div>
-      {rootRoute ? <DevsGits devs={devsArray.devs} /> : null}
       <p className={styles.year}>2023</p>
+      {rootRoute ? <DevsGits devs={devsArray.devs} /> : null}
     </footer>
   );
 }

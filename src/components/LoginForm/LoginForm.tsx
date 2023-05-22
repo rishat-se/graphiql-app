@@ -13,10 +13,8 @@ import ErrorModal from '../ErrorModal/ErrorModal';
 import styles from './form.module.scss';
 
 export default function LoginForm() {
-  const { signIn } = authSlice.actions;
   const [fbError, setFbError] = useState<boolean | string>(false);
   const [visible, setVisible] = useState<boolean>(false);
-  const dispatch = useAppDispatch();
 
   const visiblePassword = () => {
     setVisible(!visible);
@@ -35,13 +33,7 @@ export default function LoginForm() {
   const onSubmit: SubmitHandler<IFormData> = async (data) => {
     try {
       const auth = getAuth();
-      const createdUser = await signInWithEmailAndPassword(auth, data.email, data.password);
-      dispatch(
-        signIn({
-          isAuth: true,
-          email: createdUser.user.email,
-        })
-      );
+      await signInWithEmailAndPassword(auth, data.email, data.password);
     } catch (e) {
       if (e) {
         if (e instanceof Error) {
