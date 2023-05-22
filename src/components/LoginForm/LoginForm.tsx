@@ -1,7 +1,5 @@
 import { IFormData } from '@/constants/form-types';
 import { emailPattern, passwordPattern } from '@/constants/regexps';
-import { useAppDispatch } from '@/hooks/redux';
-import { authSlice } from '@/store/slices/userSlice';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
