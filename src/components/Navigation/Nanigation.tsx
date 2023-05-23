@@ -17,7 +17,7 @@ export default function Navbar() {
     dispatch(singOut());
     auth.signOut();
     deleteCookie('logged');
-    router.push('/');
+    // router.push('/');
   };
   return (
     <nav className={styles.nav}>

@@ -1,7 +1,7 @@
 import { app } from '@/firebase/firebase';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import { authSlice } from '@/store/slices/userSlice';
-import { getCookie } from 'cookies-next';
+import { deleteCookie, getCookie } from 'cookies-next';
 import { getAuth } from 'firebase/auth';
 import jwt, { JwtPayload } from 'jsonwebtoken';
 import { useRouter } from 'next/router';
@@ -37,23 +37,27 @@ export default function AuthCheck({ children }: { children: React.ReactNode }) {
     router.events.on('beforeHistoryChange', () => {
       if (!getCookie('logged')) {
         us.signOut();
-        if (isAuth === true) dispatch(singOut());
         setIsLoading(false);
-
         return;
       } else {
         us.onAuthStateChanged((user) => {
           if (user) {
             dispatch(signIn({ isAuth: true, email: user.email }));
             setIsLoading(false);
+            return;
           } else {
+            us.signOut();
+            deleteCookie('logged');
+            dispatch(singOut());
+            router.push(pathname && '/');
             setIsLoading(false);
+            return;
           }
         });
       }
     });
     tokenTest();
-  }, [pathname]);
+  }, []);
 
   return isLoading ? <Loading /> : <>{children}</>;
 }
