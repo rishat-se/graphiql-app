@@ -1,7 +1,10 @@
+import { app } from '@/firebase/firebase';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import { authSlice } from '@/store/slices/userSlice';
+import { getCookie } from 'cookies-next';
 import { getAuth } from 'firebase/auth';
 import jwt, { JwtPayload } from 'jsonwebtoken';
+import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import Loading from '../Loading/Loading';
 
@@ -10,7 +13,7 @@ export default function AuthCheck({ children }: { children: React.ReactNode }) {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const { signIn, singOut } = authSlice.actions;
   const dispatch = useAppDispatch();
-
+  const router = useRouter();
   //experimental feature
   const tokenTest = async () => {
     const expTime = await getAuth().currentUser?.getIdToken();
@@ -28,14 +31,22 @@ export default function AuthCheck({ children }: { children: React.ReactNode }) {
       }, 1000);
     }
   };
-
+  const us = getAuth(app);
   useEffect(() => {
-    getAuth().onAuthStateChanged((user) => {
-      if (user) {
-        if (isAuth === false) dispatch(signIn({ isAuth: true, email: user.email }));
+    router.events.on('beforeHistoryChange', () => {
+      if (!getCookie('logged')) {
+        us.signOut();
         setIsLoading(false);
+        return;
       } else {
-        setIsLoading(false);
+        us.onAuthStateChanged((user) => {
+          if (user) {
+            dispatch(signIn({ isAuth: true, email: user.email }));
+            setIsLoading(false);
+          } else {
+            setIsLoading(false);
+          }
+        });
       }
     });
     tokenTest();

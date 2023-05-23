@@ -35,7 +35,7 @@ export default function LoginForm() {
     try {
       const auth = getAuth();
       await signInWithEmailAndPassword(auth, data.email, data.password);
-      setCookie('logged', 'true', { secure: true, sameSite: 'none' });
+      setCookie('logged', 'true');
       router.prefetch('/main');
       router.push('/main');
     } catch (e) {
