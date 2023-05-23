@@ -1,5 +1,6 @@
 import { IFormData } from '@/constants/form-types';
 import { emailPattern, passwordPattern } from '@/constants/regexps';
+import { setCookie } from 'cookies-next';
 import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
@@ -9,11 +10,12 @@ import Eye from '../../../public/icons/eye.svg';
 import ClosedEye from '../../../public/icons/eyeclosed.svg';
 import ErrorModal from '../ErrorModal/ErrorModal';
 import styles from '../LoginForm/form.module.scss';
+import { useRouter } from 'next/router';
 
 export default function Form() {
   const [fbError, setFbError] = useState<string | boolean>(false);
   const [visible, setVisible] = useState<boolean>(false);
-
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -31,6 +33,9 @@ export default function Form() {
     try {
       const auth = getAuth();
       await createUserWithEmailAndPassword(auth, data.email, data.password);
+      setCookie('logged', 'true', { secure: true, sameSite: 'none' });
+      router.prefetch('/main');
+      router.push('/main');
     } catch (e) {
       if (e instanceof Error) {
         setFbError(e.message);

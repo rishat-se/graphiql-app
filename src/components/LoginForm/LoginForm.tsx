@@ -1,7 +1,9 @@
 import { IFormData } from '@/constants/form-types';
 import { emailPattern, passwordPattern } from '@/constants/regexps';
+import { setCookie } from 'cookies-next';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { SubmitHandler } from 'react-hook-form/dist/types';
@@ -13,6 +15,7 @@ import styles from './form.module.scss';
 export default function LoginForm() {
   const [fbError, setFbError] = useState<boolean | string>(false);
   const [visible, setVisible] = useState<boolean>(false);
+  const router = useRouter();
 
   const visiblePassword = () => {
     setVisible(!visible);
@@ -32,6 +35,9 @@ export default function LoginForm() {
     try {
       const auth = getAuth();
       await signInWithEmailAndPassword(auth, data.email, data.password);
+      setCookie('logged', 'true', { secure: true, sameSite: 'none' });
+      router.prefetch('/main');
+      router.push('/main');
     } catch (e) {
       if (e) {
         if (e instanceof Error) {

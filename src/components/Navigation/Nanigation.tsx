@@ -1,7 +1,9 @@
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import { authSlice } from '@/store/slices/userSlice';
+import { deleteCookie } from 'cookies-next';
 import { getAuth } from 'firebase/auth';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import styles from './navigation.module.scss';
 
 export default function Navbar() {
@@ -9,10 +11,13 @@ export default function Navbar() {
   const { singOut } = authSlice.actions;
   const dispatch = useAppDispatch();
   const notAuthorized = isAuth === false;
+  const router = useRouter();
   const sign = () => {
     const auth = getAuth();
     dispatch(singOut());
     auth.signOut();
+    deleteCookie('logged');
+    router.push('/');
   };
   return (
     <nav className={styles.nav}>
