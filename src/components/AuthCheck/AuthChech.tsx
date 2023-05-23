@@ -14,6 +14,7 @@ export default function AuthCheck({ children }: { children: React.ReactNode }) {
   const { signIn, singOut } = authSlice.actions;
   const dispatch = useAppDispatch();
   const router = useRouter();
+  const { pathname } = useRouter();
   //experimental feature
   const tokenTest = async () => {
     const expTime = await getAuth().currentUser?.getIdToken();
@@ -36,7 +37,9 @@ export default function AuthCheck({ children }: { children: React.ReactNode }) {
     router.events.on('beforeHistoryChange', () => {
       if (!getCookie('logged')) {
         us.signOut();
+        if (isAuth === true) dispatch(singOut());
         setIsLoading(false);
+
         return;
       } else {
         us.onAuthStateChanged((user) => {
@@ -50,7 +53,7 @@ export default function AuthCheck({ children }: { children: React.ReactNode }) {
       }
     });
     tokenTest();
-  }, []);
+  }, [pathname]);
 
   return isLoading ? <Loading /> : <>{children}</>;
 }
