@@ -1,44 +1,48 @@
 import { IFormData } from '@/constants/form-types';
 import { emailPattern, passwordPattern } from '@/constants/regexps';
 import { setCookie } from 'cookies-next';
-import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { SubmitHandler } from 'react-hook-form/dist/types';
 import Eye from '../../../public/icons/eye.svg';
 import ClosedEye from '../../../public/icons/eyeclosed.svg';
 import ErrorModal from '../ErrorModal/ErrorModal';
-import styles from '../LoginForm/form.module.scss';
-import { useRouter } from 'next/router';
+import styles from './form.module.scss';
 
-export default function Form() {
-  const [fbError, setFbError] = useState<string | boolean>(false);
+export default function LoginForm() {
+  const [fbError, setFbError] = useState<boolean | string>(false);
   const [visible, setVisible] = useState<boolean>(false);
   const router = useRouter();
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<IFormData>();
-  const closeModal = () => {
-    setFbError(false);
-  };
 
   const visiblePassword = () => {
     setVisible(!visible);
   };
 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IFormData>();
+
+  const closeModal = () => {
+    setFbError(false);
+  };
+
   const onSubmit: SubmitHandler<IFormData> = async (data) => {
     try {
       const auth = getAuth();
-      await createUserWithEmailAndPassword(auth, data.email, data.password);
-      setCookie('logged', 'true', { secure: true, sameSite: 'none' });
+      await signInWithEmailAndPassword(auth, data.email, data.password);
+      setCookie('logged', 'true');
       router.prefetch('/main');
       router.push('/main');
     } catch (e) {
-      if (e instanceof Error) {
-        setFbError(e.message);
+      if (e) {
+        if (e instanceof Error) {
+          setFbError(e.message);
+        }
       }
     }
   };
@@ -57,10 +61,10 @@ export default function Form() {
           <span>Enter your email</span>
           <input
             {...register('email', {
-              required: 'This field is required.It must be valid email',
+              required: 'This field is required.It must be email.',
               pattern: {
                 value: emailPattern,
-                message: 'This field is required.It must be valid email',
+                message: 'This field is required.It must be email.',
               },
             })}
             className={styles.input}
@@ -100,17 +104,15 @@ export default function Form() {
               ></Image>
             </button>
           </div>
-          {errors.password && <p className={styles.error}>{errors.password.message}</p>}
+
+          {errors.password && <p className={styles.error}>{errors.password?.message}</p>}
         </label>
         <div className={styles.submit_container}>
-          <input type="submit" className={styles.submit} value="Sign up" />
+          <input type="submit" className={styles.submit} value="Sign in" />
         </div>
       </form>
       {fbError ? (
-        <ErrorModal
-          toggle={closeModal}
-          text="User with this email adress already exists,please enter another email =)"
-        />
+        <ErrorModal toggle={closeModal} text="Please enter correct email or password =)" />
       ) : null}
     </div>
   );

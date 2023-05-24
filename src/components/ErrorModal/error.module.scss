@@ -1,0 +1,74 @@
+@import '../../styles/variables.scss';
+
+.modal {
+  position: absolute;
+  width: 320px;
+  height: 320px;
+  background: #000000de;
+  color: $red;
+  text-shadow: $textShadowRed;
+  display: flex;
+  flex-direction: column;
+  font-size: 2em;
+  z-index: 5;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  transform: translateY(50%) scale(1);
+  padding: 1em;
+  animation: blink 0.5s 1 ease, text 2.5s infinite ease-in;
+  border: 2px solid $violet;
+}
+
+@keyframes text {
+  0% {
+    box-shadow: 1px -3px 24px 15px $violet;
+  }
+  50% {
+    box-shadow: 1px -3px 24px 15px $green;
+  }
+  100% {
+    box-shadow: 1px -3px 24px 15px $red;
+  }
+}
+
+@keyframes blink {
+  0% {
+    transform: translateY(50%) scale(0.1);
+  }
+  20% {
+    transform: translateY(50%) scale(0.3);
+  }
+  40% {
+    transform: translateY(50%) scale(0.5);
+  }
+  60% {
+    transform: translateY(50%) scale(0.7);
+  }
+  80% {
+    transform: translateY(50%) scale(0.9);
+  }
+  100% {
+    transform: translateY(50%) scale(1);
+  }
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  background: transparent;
+  color: inherit;
+  font-size: inherit;
+  text-shadow: inherit;
+  &:hover {
+    color: $violet;
+    text-shadow: $textShadowViolet;
+  }
+}
+
+.text {
+  text-align: center;
+  line-height: 1.2em;
+}

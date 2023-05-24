@@ -1,4 +1,4 @@
-@import "../../styles/variables.scss";
+@import '../../styles/variables.scss';
 
 .header {
   font-family: $RMfont;
@@ -8,6 +8,9 @@
   align-items: center;
   gap: 20px;
   font-size: 2em;
+  @media (max-width: 768px) {
+    font-size: 1em;
+  }
 }
 
 .logo {
@@ -28,4 +31,10 @@
     color: $violet;
     text-shadow: $textShadowViolet;
   }
+}
+
+.user {
+  font-size: 0.5em;
+  color: $green;
+  text-shadow: $textShadowGreen;
 }

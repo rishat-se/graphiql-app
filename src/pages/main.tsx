@@ -1,8 +1,8 @@
+import CodeEditor from '@/components/CodeEditor/CodeEditor';
+import ControlsPanel from '@/components/ControlsPanel/ControlsPanel';
 import Layout from '@/components/Layout/Layout';
 import styles from '@/styles/main.module.scss';
 import Head from 'next/head';
-import ControlsPanel from '@/components/ControlsPanel/ControlsPanel';
-import CodeEditor from '@/components/CodeEditor/CodeEditor';
 
 export default function Main() {
   return (

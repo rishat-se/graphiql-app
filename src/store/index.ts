@@ -1,16 +1,17 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import { authSlice } from './slices/userSlice';
 import { editorSlice } from './slices/editorSlice';
+import authReducer from './slices/userSlice';
 
 const rootReducer = combineReducers({
-  [authSlice.name]: authSlice.reducer,
+  authReducer,
   [editorSlice.name]: editorSlice.reducer,
 });
 
-export const setupStore = () =>
-  configureStore({
+export const setupStore = () => {
+  return configureStore({
     reducer: rootReducer,
   });
+};
 
 export type RootState = ReturnType<typeof rootReducer>;
 export type AppStore = ReturnType<typeof setupStore>;
