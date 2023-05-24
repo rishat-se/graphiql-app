@@ -12,6 +12,7 @@ export default function AllTypesView({ node }: AllTypesViewProps) {
       <h2>All Schema Types</h2>
       {Object.keys(typesMap)
         .filter((type) => !type.startsWith('__'))
+        .sort((a, b) => a.localeCompare(b))
         .map((type) => (
           <div key={typesMap[type].name}>
             <SDLLink type={typesMap[type]} typeName={typesMap[type].name} />

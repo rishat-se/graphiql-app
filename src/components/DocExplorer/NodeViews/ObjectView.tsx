@@ -21,12 +21,15 @@ export default function OueryView({ node }: QueryViewProps) {
   return (
     <div>
       <h2>{node.name}</h2>
+      <p>{node.description}</p>
       <h3>Fields</h3>
-      {Object.keys(fieldsMap).map((field) => (
-        <div key={fieldsMap[field].name}>
-          <Field field={fieldsMap[field]} />
-        </div>
-      ))}
+      {Object.keys(fieldsMap)
+        .sort((a, b) => a.localeCompare(b))
+        .map((field) => (
+          <div key={fieldsMap[field].name}>
+            <Field field={fieldsMap[field]} />
+          </div>
+        ))}
     </div>
   );
 }

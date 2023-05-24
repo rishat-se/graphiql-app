@@ -5,7 +5,7 @@ export default function useSetCurNode() {
   const setCurNode = useContext(DocExplorerContext);
 
   if (!setCurNode) {
-    throw new Error('useSetCurNode has to be used within <DocExplorerConext.Provider>"');
+    throw new Error('useSetCurNode has to be used within <DocExplorerContext.Provider>"');
   }
   return setCurNode;
 }

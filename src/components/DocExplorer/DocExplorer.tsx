@@ -61,6 +61,9 @@ export default function DocExplorer({ schema }: DocExplorerProps) {
         {curNodeType === 'GraphQLScalarType' && <ScalarView node={curNode as GraphQLScalarType} />}
         {curNodeType === 'GraphQLEnumType' && <EnumView node={curNode as GraphQLEnumType} />}
         {curNodeType === 'GraphQLUnionType' && <UnionView node={curNode as GraphQLUnionType} />}
+        {/* {curNodeType === 'GraphQLInterfaceType' && (
+          <InterfaceView node={curNode as GraphQLInterfaceType} />
+        )} */}
       </DocExplorerContext.Provider>
     </div>
   );
