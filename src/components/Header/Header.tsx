@@ -3,7 +3,6 @@ import { useAppSelector } from '@/hooks/redux';
 import Link from 'next/link';
 import styles from './header.module.scss';
 import { useRouter } from 'next/router';
-import { firstLetterToUpperCase } from './Header.utils';
 import { useTranslation } from 'next-i18next';
 
 export default function Header() {
@@ -28,9 +27,25 @@ export default function Header() {
         </p>
       )}
       <Navbar />
-      <button className={styles.button} type="button" onClick={changeLocaleHandler}>
-        {firstLetterToUpperCase(locale)}
-      </button>
+      <label className={styles.toggle}>
+        <span
+          className={`${styles.toggle__item} ${locale === 'by' ? styles.toggle__item_active : ''}`}
+        >
+          By
+        </span>
+        <input
+          type="radio"
+          className={`${styles.toggle__switcher} ${
+            locale === 'en' ? styles.toggle__switcher_active : ''
+          }`}
+          onClick={changeLocaleHandler}
+        />
+        <span
+          className={`${styles.toggle__item} ${locale === 'en' ? styles.toggle__item_active : ''}`}
+        >
+          En
+        </span>
+      </label>
     </header>
   );
 }
