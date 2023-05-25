@@ -9,7 +9,7 @@ import Head from 'next/head';
 export default function Auth() {
   const { isAuth } = useAppSelector((state) => state.authReducer);
   const notAuthrized = isAuth === false;
-  const { t } = useTranslation('signIn');
+  const { t } = useTranslation('pages/signIn');
 
   return (
     <>
@@ -24,7 +24,7 @@ export default function Auth() {
 export async function getStaticProps({ locale }: { locale: string }) {
   return {
     props: {
-      ...(await serverSideTranslations(locale, ['common', 'signIn', 'loginForm'])),
+      ...(await serverSideTranslations(locale, ['common', 'pages/signIn', 'components/loginForm'])),
     },
   };
 }

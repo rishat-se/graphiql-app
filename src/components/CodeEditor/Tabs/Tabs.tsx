@@ -14,7 +14,7 @@ interface TabsProps {
 }
 
 function Tabs({ inputEditorRef }: TabsProps) {
-  const { t } = useTranslation('editor');
+  const { t } = useTranslation('components/editor');
   const dispatch = useAppDispatch();
   const { current, tabs } = useAppSelector((state) => state.editor);
   const TABS_LIMIT = 10;

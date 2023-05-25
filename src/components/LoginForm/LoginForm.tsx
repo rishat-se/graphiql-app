@@ -16,7 +16,7 @@ import { useTranslation } from 'next-i18next';
 export default function LoginForm() {
   const [fbError, setFbError] = useState<boolean | string>(false);
   const [visible, setVisible] = useState<boolean>(false);
-  const { t } = useTranslation('loginForm');
+  const { t } = useTranslation('components/loginForm');
   const router = useRouter();
 
   const visiblePassword = () => {

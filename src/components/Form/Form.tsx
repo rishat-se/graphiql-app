@@ -15,7 +15,7 @@ import { useTranslation } from 'next-i18next';
 
 export default function Form() {
   const router = useRouter();
-  const { t } = useTranslation('form');
+  const { t } = useTranslation('components/form');
   const [visible, setVisible] = useState<boolean>(false);
   const [fbError, setFbError] = useState<string | boolean>(false);
   const {

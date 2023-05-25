@@ -5,7 +5,7 @@ import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 export default function Home() {
-  const { t } = useTranslation('welcome');
+  const { t } = useTranslation('pages/welcome');
 
   return (
     <>
@@ -27,7 +27,7 @@ export default function Home() {
 export async function getStaticProps({ locale }: { locale: string }) {
   return {
     props: {
-      ...(await serverSideTranslations(locale, ['common', 'welcome'])),
+      ...(await serverSideTranslations(locale, ['common', 'pages/welcome'])),
     },
   };
 }

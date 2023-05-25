@@ -11,7 +11,7 @@ export default function Header() {
   const { pathname, locale, push } = useRouter();
   const { t } = useTranslation('common');
 
-  const changeLocaleHandlaer = () => {
+  const changeLocaleHandler = () => {
     locale === 'en'
       ? push(pathname, undefined, { locale: 'by' })
       : push(pathname, undefined, { locale: 'en' });
@@ -28,7 +28,7 @@ export default function Header() {
         </p>
       )}
       <Navbar />
-      <button className={styles.button} type="button" onClick={changeLocaleHandlaer}>
+      <button className={styles.button} type="button" onClick={changeLocaleHandler}>
         {firstLetterToUpperCase(locale)}
       </button>
     </header>

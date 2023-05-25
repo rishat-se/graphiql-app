@@ -12,7 +12,7 @@ import { useTranslation } from 'next-i18next';
 function Tools() {
   const editorRef = useRef<ReactCodeMirrorRef>(null);
   const dispatch = useAppDispatch();
-  const { t } = useTranslation('editor');
+  const { t } = useTranslation('components/editor');
   const { variables, headers, isOpen, mode } = useAppSelector(
     (state) => state.editor.current.tools
   );

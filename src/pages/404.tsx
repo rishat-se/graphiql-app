@@ -6,7 +6,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 
 export default function NotFound() {
-  const { t } = useTranslation('404');
+  const { t } = useTranslation('pages/404');
 
   return (
     <>
@@ -32,7 +32,7 @@ export default function NotFound() {
 export async function getStaticProps({ locale }: { locale: string }) {
   return {
     props: {
-      ...(await serverSideTranslations(locale, ['common', '404'])),
+      ...(await serverSideTranslations(locale, ['common', 'pages/404'])),
     },
   };
 }
