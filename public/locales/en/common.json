@@ -1,0 +1,11 @@
+{
+  "header": {
+    "logged-as": "Account"
+  },
+  "navigation": {
+    "sign-in": "Sign In",
+    "sign-up": "Sign Up",
+    "sign-out": "Sign Out",
+    "link-to-main": "Main"
+  }
+}
