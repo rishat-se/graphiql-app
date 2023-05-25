@@ -1,12 +1,12 @@
-import { apiURL } from '@/constants/api';
 import { GraphQLClient } from 'graphql-request';
 import useSWR from 'swr';
 import { IntrospectionQuery, buildClientSchema, getIntrospectionQuery } from 'graphql';
 import DocExplorer, { DocGraphQLSchema } from '@/components//DocExplorer/DocExplorer';
+import { API_BASE_LINK } from '@/constants';
 
 const introQuery = getIntrospectionQuery();
 
-const client = new GraphQLClient(apiURL, { headers: {} });
+const client = new GraphQLClient(API_BASE_LINK, { headers: {} });
 
 const fetcher = async (query: string) => {
   // await new Promise((resolve) => setTimeout(resolve, 3000));

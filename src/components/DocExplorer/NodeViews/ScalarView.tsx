@@ -1,3 +1,4 @@
+import styles from '@/components/DocExplorer/DocExplorer.module.scss';
 import { GraphQLScalarType } from 'graphql/type';
 
 type ScalarViewProps = {
@@ -6,9 +7,9 @@ type ScalarViewProps = {
 
 export default function ScalarView({ node }: ScalarViewProps) {
   return (
-    <div>
+    <div className={styles.output__view}>
       <h2>{node.name}</h2>
-      <p>{node.description}</p>
+      <p className={styles.output__description}>{node.description}</p>
     </div>
   );
 }

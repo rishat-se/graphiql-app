@@ -1,3 +1,4 @@
+import styles from '@/components/DocExplorer/DocExplorer.module.scss';
 import { GraphQLInputObjectType, GraphQLObjectType } from 'graphql/type';
 import Field from '@/components/DocExplorer/NodeViews/Common/Field';
 import { DocGraphQLField } from '../DocExplorer';
@@ -19,17 +20,19 @@ export default function OueryView({ node }: QueryViewProps) {
   );
 
   return (
-    <div>
+    <div className={styles.output__view}>
       <h2>{node.name}</h2>
-      <p>{node.description}</p>
-      <h3>Fields</h3>
-      {Object.keys(fieldsMap)
-        .sort((a, b) => a.localeCompare(b))
-        .map((field) => (
-          <div key={fieldsMap[field].name}>
-            <Field field={fieldsMap[field]} />
-          </div>
-        ))}
+      <p className={styles.output__description}>{node.description}</p>
+      <div className={styles.output__section}>
+        <h3>Fields</h3>
+        {Object.keys(fieldsMap)
+          .sort((a, b) => a.localeCompare(b))
+          .map((field) => (
+            <div className={styles.output__item} key={fieldsMap[field].name}>
+              <Field field={fieldsMap[field]} />
+            </div>
+          ))}
+      </div>
     </div>
   );
 }

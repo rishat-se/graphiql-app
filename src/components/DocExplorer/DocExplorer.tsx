@@ -1,3 +1,4 @@
+import styles from './DocExplorer.module.scss';
 import { useState } from 'react';
 import {
   GraphQLEnumType,
@@ -11,7 +12,6 @@ import {
 } from 'graphql/type';
 import RootView from '@/components/DocExplorer/NodeViews/RootView';
 import { DocExplorerContext } from '@/components/DocExplorer/Context/DocExplorerContext';
-import AllSchemaTypesView from '@/components/DocExplorer/NodeViews/AllSchemaTypesView';
 import BackLink from '@/components/DocExplorer/NodeViews/Common/BackLink';
 import OueryView from '@/components/DocExplorer/NodeViews/ObjectView';
 import FieldView from '@/components/DocExplorer/NodeViews/FieldView';
@@ -46,13 +46,10 @@ export default function DocExplorer({ schema }: DocExplorerProps) {
   };
 
   return (
-    <div>
+    <section className={styles.output}>
       <DocExplorerContext.Provider value={setCurNode}>
         <BackLink history={docHistory} goBack={goBack} />
         {curNodeType === 'GraphQLSchema' && <RootView node={curNode as DocGraphQLSchema} />}
-        {curNodeType === 'GraphQLSchema' && (
-          <AllSchemaTypesView node={curNode as DocGraphQLSchema} />
-        )}
         {curNodeType === 'GraphQLObjectType' && <OueryView node={curNode as GraphQLObjectType} />}
         {curNodeType === 'GraphQLInputObjectType' && (
           <OueryView node={curNode as GraphQLInputObjectType} />
@@ -65,6 +62,6 @@ export default function DocExplorer({ schema }: DocExplorerProps) {
           <InterfaceView node={curNode as GraphQLInterfaceType} />
         )} */}
       </DocExplorerContext.Provider>
-    </div>
+    </section>
   );
 }

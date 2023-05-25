@@ -4,12 +4,13 @@ import { DocNode } from '@/components/DocExplorer/DocExplorer';
 type SchemaLinkProps = {
   type: DocNode;
   typeName: string;
+  className: string;
 };
 
-export default function SDLLink({ type, typeName }: SchemaLinkProps) {
+export default function SDLLink({ type, typeName, className }: SchemaLinkProps) {
   const handleClick = useSetCurNode();
   return (
-    <a href="#" onClick={() => handleClick(type)}>
+    <a className={className} href="#" onClick={() => handleClick(type)}>
       {typeName}
     </a>
   );

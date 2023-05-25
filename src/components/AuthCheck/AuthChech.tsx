@@ -1,5 +1,5 @@
 import { app } from '@/firebase/firebase';
-import { useAppDispatch, useAppSelector } from '@/hooks/redux';
+import { useAppDispatch } from '@/hooks/redux';
 import { authSlice } from '@/store/slices/userSlice';
 import { deleteCookie, getCookie } from 'cookies-next';
 import { getAuth } from 'firebase/auth';
@@ -9,7 +9,7 @@ import React, { useEffect, useState } from 'react';
 import Loading from '../Loading/Loading';
 
 export default function AuthCheck({ children }: { children: React.ReactNode }) {
-  const { isAuth } = useAppSelector((state) => state.authReducer);
+  // const { isAuth } = useAppSelector((state) => state.authReducer);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const { signIn, singOut } = authSlice.actions;
   const dispatch = useAppDispatch();

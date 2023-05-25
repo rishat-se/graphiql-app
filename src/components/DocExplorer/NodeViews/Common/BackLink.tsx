@@ -1,3 +1,4 @@
+import styles from '@/components/DocExplorer/DocExplorer.module.scss';
 import { DocNode } from '../../DocExplorer';
 
 type BackHistoryProps = {
@@ -15,11 +16,11 @@ export default function BackLink({ history, goBack }: BackHistoryProps) {
   }
 
   return (
-    <>
+    <div>
       <span>{'< '}</span>
-      <a href="#" onClick={goBack}>
+      <a className={styles.output__backlink} href="#" onClick={goBack}>
         {backLinkText}
       </a>
-    </>
+    </div>
   );
 }
