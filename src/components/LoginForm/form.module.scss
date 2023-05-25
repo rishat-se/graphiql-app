@@ -1,4 +1,4 @@
-@import "../../styles/variables.scss";
+@import '../../styles/variables.scss';
 
 .form {
   display: flex;
@@ -6,11 +6,12 @@
   gap: 2.3em;
   margin-top: 8em;
   z-index: 3;
+  position: relative;
 }
 
 .container {
   font-family: $RMfont;
-  background: url("../../../public/images/portal.gif");
+  background: url('../../../public/images/portal.gif');
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
@@ -23,7 +24,7 @@
   padding: 2em;
   position: relative;
   &:before {
-    content: "";
+    content: '';
     position: absolute;
     top: 0;
     left: 0;
@@ -31,6 +32,9 @@
     right: 0;
     z-index: 2;
     background-color: rgba(0, 0, 0, 0.425);
+  }
+  @media (max-width: 768px) {
+    background-size: cover;
   }
 }
 
@@ -56,12 +60,12 @@
   border-radius: 5px;
   background-color: $grey;
   font-size: 0.6em;
-  width: 80%;
   height: 2.5em;
   padding: 1em;
   text-align: center;
   color: $green;
   text-shadow: $textShadowGreen;
+  width: 300px;
   &::placeholder {
     font-size: 1.3em;
     color: $red;
@@ -88,4 +92,27 @@
     color: $violet;
     text-shadow: $textShadowViolet;
   }
+}
+
+.error {
+  color: $red;
+  text-shadow: $textShadowRed;
+  font-size: 0.7em;
+  max-width: 300px;
+  text-align: center;
+}
+
+.password {
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.button {
+  position: absolute;
+  right: -5px;
+  top: 0;
+  bottom: 0;
+  background-color: transparent;
+  cursor: pointer;
 }

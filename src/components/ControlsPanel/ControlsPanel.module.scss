@@ -1,0 +1,54 @@
+@import '@/styles/variables';
+
+.controls {
+  align-self: stretch;
+  display: grid;
+  grid-template-rows: repeat(2, 1fr);
+
+  @media (max-width: 1000px) {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: initial;
+  }
+
+  &__button {
+    display: block;
+    margin-bottom: 15px;
+    background-color: transparent;
+    transition: 0.3s;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    &:hover {
+      opacity: 0.7;
+    }
+
+    &:active {
+      opacity: 0.5;
+    }
+
+    @media (max-width: 1000px) {
+      margin-bottom: 0;
+    }
+  }
+
+  &__docs {
+    place-self: start center;
+
+    @media (max-width: 1000px) {
+      place-self: center start;
+    }
+  }
+
+  &__other {
+    place-self: end center;
+
+    @media (max-width: 1000px) {
+      place-self: center end;
+      display: flex;
+      align-items: baseline;
+      gap: 5px;
+    }
+  }
+}

@@ -1,13 +1,10 @@
-@import "../../styles/variables";
+@import '../../styles/variables';
 
 .footer {
   font-family: $RMfont;
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   padding: 0.5em;
-  justify-content: space-around;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 0.5em;
 }
 .special {
   font-family: $RMfont;
@@ -22,4 +19,13 @@
   font-size: 2em;
   color: $brightgreen;
   text-shadow: $textShadowGreen;
+  text-align: right;
+  place-self: center center;
+}
+
+.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  place-self: left center;
 }

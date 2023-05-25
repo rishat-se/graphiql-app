@@ -1,7 +1,6 @@
 import Layout from '@/components/Layout/Layout';
 import styles from '@/styles/home.module.scss';
 import Head from 'next/head';
-import Link from 'next/link';
 
 export default function Home() {
   return (
@@ -10,7 +9,7 @@ export default function Home() {
         <title>GraphiQL : Home</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         {/*Needs to be changed to custom one */}
-        <link rel="icon" href="../../public/images/portal.png" />
+        <link rel="icon" href="/favicon.ico" />
       </Head>
       <Layout>
         <div className={styles.container}>
@@ -18,9 +17,6 @@ export default function Home() {
           <p className={styles.description}>
             The app is created as a learning project and may not be used for commercial purposes!
           </p>
-          <Link className={styles.link} href="/auth">
-            Try it out
-          </Link>
         </div>
       </Layout>
     </>

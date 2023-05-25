@@ -4,7 +4,7 @@ import { devsArray } from '@/constants/devs';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import RssLogo from '../../../public/icons/method-draw-image.svg';
+import RssLogo from '../../../public/icons/vectorpaint.svg';
 
 export default function Footer() {
   const { pathname } = useRouter();
@@ -13,7 +13,7 @@ export default function Footer() {
 
   return (
     <footer className={rootRoute ? styles.footer : styles.special}>
-      <div>
+      <div className={styles.logo}>
         <Link href="https://rs.school/react/">
           <Image src={RssLogo} width={70} height={40} alt="course logo" />
         </Link>
