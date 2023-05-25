@@ -63,11 +63,8 @@ export default function LoginForm() {
           <span>{t('email-field.label')}</span>
           <input
             {...register('email', {
-              required: t('email-field.error') ?? undefined,
-              pattern: {
-                value: emailPattern,
-                message: t('email-filed.error') ?? undefined,
-              },
+              required: true,
+              pattern: emailPattern,
             })}
             className={styles.input}
             type="text"
@@ -75,18 +72,15 @@ export default function LoginForm() {
             name="email"
             id="email"
           />
-          {errors.email && <p className={styles.error}>{errors.email.message}</p>}
+          {errors.email && <p className={styles.error}>{t('email-field.error')}</p>}
         </label>
         <label className={styles.label} htmlFor="password">
           <span>{t('password-field.label')}</span>
           <div className={styles.password}>
             <input
               {...register('password', {
-                required: t('password-field.error') ?? undefined,
-                pattern: {
-                  value: passwordPattern,
-                  message: t('password-field.error') ?? undefined,
-                },
+                required: true,
+                pattern: passwordPattern,
               })}
               className={styles.input}
               type={visible ? 'text' : 'password'}
@@ -105,13 +99,15 @@ export default function LoginForm() {
             </button>
           </div>
 
-          {errors.password && <p className={styles.error}>{errors.password?.message}</p>}
+          {errors.password && <p className={styles.error}>{t('password-field.error')}</p>}
         </label>
         <div className={styles.submit_container}>
           <input type="submit" className={styles.submit} value={t('submit-button') ?? undefined} />
         </div>
       </form>
-      {fbError ? <ErrorModal toggle={closeModal} text={t('error-modal-message') ?? ''} /> : null}
+      {fbError ? (
+        <ErrorModal toggle={closeModal} text={t('error-modal-message') ?? 'Error'} />
+      ) : null}
     </div>
   );
 }
