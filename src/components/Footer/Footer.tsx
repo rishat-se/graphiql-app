@@ -1,3 +1,4 @@
+import linksStyles from '@/components/DevComponent/dev.module.scss';
 import DevsGits from '@/components/DevsGits/DevsGits';
 import styles from '@/components/footer/footer.module.scss';
 import { devsArray } from '@/constants/devs';
@@ -19,7 +20,21 @@ export default function Footer() {
         </Link>
       </div>
       <p className={styles.year}>2023</p>
-      {rootRoute ? <DevsGits devs={devsArray.devs} /> : null}
+      {rootRoute ? (
+        <DevsGits devs={devsArray.devs} />
+      ) : (
+        <div className={linksStyles.devs}>
+          <Link className={linksStyles.link} href="https://github.com/rishat-se">
+            rishat-se
+          </Link>
+          <Link className={linksStyles.link} href="https://github.com/KohnoA">
+            KohnoA
+          </Link>
+          <Link className={linksStyles.link} href="https://github.com/Cibulya">
+            Cibulya
+          </Link>
+        </div>
+      )}
     </footer>
   );
 }

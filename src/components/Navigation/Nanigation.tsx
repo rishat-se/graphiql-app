@@ -11,13 +11,13 @@ export default function Navbar() {
   const { singOut } = authSlice.actions;
   const dispatch = useAppDispatch();
   const notAuthorized = isAuth === false;
-  const router = useRouter();
+  const { pathname } = useRouter();
+  const mainRoot = pathname === '/main';
   const sign = () => {
     const auth = getAuth();
     dispatch(singOut());
     auth.signOut();
     deleteCookie('logged');
-    // router.push('/');
   };
   return (
     <nav className={styles.nav}>
@@ -32,9 +32,12 @@ export default function Navbar() {
         </>
       ) : (
         <>
-          <Link className={styles.link} href="/main">
-            Go to main page
-          </Link>
+          {mainRoot ? null : (
+            <Link className={styles.link} href="/main">
+              Go to main page
+            </Link>
+          )}
+
           <button className={styles.sign__out} type="button" onClick={sign}>
             Sign out
           </button>

@@ -8,7 +8,6 @@ export default function Home() {
       <Head>
         <title>GraphiQL : Home</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        {/*Needs to be changed to custom one */}
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Layout>
