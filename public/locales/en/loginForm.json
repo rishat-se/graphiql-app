@@ -1,0 +1,15 @@
+{
+  "title": "Authorization",
+  "email-field": {
+    "label": "Enter your email",
+    "placeholder": "Some email",
+    "error": "This field is required. It must be email."
+  },
+  "password-field": {
+    "label": "Enter your password",
+    "placeholder": "Some password",
+    "error": "It will be minimum 8 symbols, at least one letter, one digit, one special character."
+  },
+  "submit-button": "Sign In",
+  "error-modal-message": "Please enter correct email or password =)"
+}
