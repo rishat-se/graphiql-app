@@ -7,12 +7,14 @@ import Link from 'next/link';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import { addNewTab, removeTab, setCurrentTab, saveCurrentTab } from '@/store/slices/editorSlice';
 import { ReactCodeMirrorRef } from '@uiw/react-codemirror';
+import { useTranslation } from 'next-i18next';
 
 interface TabsProps {
   inputEditorRef: RefObject<ReactCodeMirrorRef>;
 }
 
 function Tabs({ inputEditorRef }: TabsProps) {
+  const { t } = useTranslation('editor');
   const dispatch = useAppDispatch();
   const { current, tabs } = useAppSelector((state) => state.editor);
   const TABS_LIMIT = 10;
@@ -51,7 +53,7 @@ function Tabs({ inputEditorRef }: TabsProps) {
                 tab.id === current.id ? styles.tabs__item_active : ''
               }`}
             >
-              <span className={styles.tabs__title}>&#8249;untitled&#8250;</span>
+              <span className={styles.tabs__title}>&#8249;{t('tab')}&#8250;</span>
               <button
                 className={styles.tabs__delete}
                 onClick={(event) => removeTabHandler(event, tab.id)}
