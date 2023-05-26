@@ -5,11 +5,9 @@ import { deleteCookie, getCookie } from 'cookies-next';
 import { getAuth } from 'firebase/auth';
 import jwt, { JwtPayload } from 'jsonwebtoken';
 import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
-import Loading from '../Loading/Loading';
+import React, { useEffect } from 'react';
 
 export default function AuthCheck({ children }: { children: React.ReactNode }) {
-  const [isLoading, setIsLoading] = useState<boolean>(true);
   const { signIn, singOut } = authSlice.actions;
   const dispatch = useAppDispatch();
   const router = useRouter();
@@ -31,25 +29,23 @@ export default function AuthCheck({ children }: { children: React.ReactNode }) {
       }, 1000);
     }
   };
+
   const us = getAuth(app);
   useEffect(() => {
     router.events.on('beforeHistoryChange', () => {
       if (!getCookie('logged')) {
         us.signOut();
-        setIsLoading(false);
         return;
       } else {
         us.onAuthStateChanged((user) => {
           if (user) {
             dispatch(signIn({ isAuth: true, email: user.email }));
-            setIsLoading(false);
             return;
           } else {
             us.signOut();
             deleteCookie('logged');
             dispatch(singOut());
             router.push(pathname && '/');
-            setIsLoading(false);
             return;
           }
         });
@@ -58,5 +54,5 @@ export default function AuthCheck({ children }: { children: React.ReactNode }) {
     tokenTest();
   }, []);
 
-  return isLoading ? <Loading /> : <>{children}</>;
+  return <>{children}</>;
 }

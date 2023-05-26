@@ -5,6 +5,7 @@ import { getAuth } from 'firebase/auth';
 import Link from 'next/link';
 import styles from './navigation.module.scss';
 import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
 
 export default function Navbar() {
   const { isAuth } = useAppSelector((state) => state.authReducer);
@@ -12,7 +13,8 @@ export default function Navbar() {
   const dispatch = useAppDispatch();
   const notAuthorized = isAuth === false;
   const { t } = useTranslation('common');
-
+  const { pathname } = useRouter();
+  const mainRoot = pathname === '/main';
   const sign = () => {
     const auth = getAuth();
     dispatch(singOut());
@@ -33,9 +35,11 @@ export default function Navbar() {
         </>
       ) : (
         <>
-          <Link className={styles.link} href="/main">
-            {t('navigation.link-to-main')}
-          </Link>
+          {mainRoot ? null : (
+            <Link className={styles.link} href="/main">
+              {t('navigation.link-to-main')}
+            </Link>
+          )}
           <button className={styles.sign__out} type="button" onClick={sign}>
             {t('navigation.sign-out')}
           </button>

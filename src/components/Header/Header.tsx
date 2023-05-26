@@ -1,12 +1,14 @@
 import Navbar from '@/components/Navigation/Nanigation';
 import { useAppSelector } from '@/hooks/redux';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 import styles from './header.module.scss';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 
 export default function Header() {
   const { email } = useAppSelector((state) => state.authReducer);
+  const [sticky, setSticky] = useState<boolean>(false);
   const { pathname, locale, push } = useRouter();
   const { t } = useTranslation('common');
 
@@ -16,8 +18,20 @@ export default function Header() {
       : push(pathname, undefined, { locale: 'en' });
   };
 
+  const makeSticky = () => {
+    if (window.scrollY >= 60) {
+      if (email !== null) setSticky(true);
+    } else {
+      setSticky(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', makeSticky);
+  }, [email]);
+
   return (
-    <header className={styles.header}>
+    <header className={sticky ? styles.active : styles.header}>
       <Link href="/" className={styles.logo}>
         Codeminers
       </Link>
