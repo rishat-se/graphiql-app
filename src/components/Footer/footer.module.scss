@@ -5,14 +5,28 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   padding: 0.5em;
+  @media (max-width: 480px) {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+  }
 }
 .special {
   font-family: $RMfont;
   display: flex;
   padding: 0.5em;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   gap: 0.8em;
+  @media (max-width: 480px) {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+  }
 }
 
 .year {

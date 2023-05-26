@@ -1,19 +1,21 @@
 import Layout from '@/components/Layout/Layout';
 import Loading from '@/components/Loading/Loading';
-import LoginForm from '@/components/LoginForm/LoginForm';
-import { useAppSelector } from '@/hooks/redux';
+import dynamic from 'next/dynamic';
 import Head from 'next/head';
 
-export default function Auth() {
-  const { isAuth } = useAppSelector((state) => state.authReducer);
-  const notAuthrized = isAuth === false;
+const ServerForm = dynamic(() => import('@/components/LoginForm/LoginForm'), {
+  loading: () => <Loading />,
+});
 
+export default function Auth() {
   return (
     <>
       <Head>
         <title>GraphiQL : Sign in</title>
       </Head>
-      <Layout>{notAuthrized ? <LoginForm /> : <Loading />}</Layout>
+      <Layout>
+        <ServerForm />
+      </Layout>
     </>
   );
 }

@@ -1,4 +1,4 @@
-@import "../../styles/variables.scss";
+@import '../../styles/variables.scss';
 
 .devcontainer {
   font-family: $RMfont;
@@ -21,4 +21,10 @@
     color: $violet;
     text-shadow: $textShadowViolet;
   }
+}
+
+.devs {
+  display: flex;
+  gap: 10px;
+  font-size: 1.3em;
 }
