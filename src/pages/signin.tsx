@@ -4,6 +4,7 @@ import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
+import { useMemo } from 'react';
 
 const ServerForm = dynamic(() => import('@/components/LoginForm/LoginForm'), {
   loading: () => <Loading />,
@@ -12,10 +13,12 @@ const ServerForm = dynamic(() => import('@/components/LoginForm/LoginForm'), {
 export default function Auth() {
   const { t } = useTranslation('pages/signIn');
 
+  const pageTitle = useMemo(() => `GraphiQL : ${t('page-title')}`, [t]);
+
   return (
     <>
       <Head>
-        <title>GraphiQL : {t('page-title')}</title>
+        <title>{pageTitle}</title>
       </Head>
       <Layout>
         <ServerForm />

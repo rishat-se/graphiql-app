@@ -4,14 +4,17 @@ import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Head from 'next/head';
 import Link from 'next/link';
+import { useMemo } from 'react';
 
 export default function NotFound() {
   const { t } = useTranslation('pages/404');
 
+  const pageTitle = useMemo(() => `GraphiQL : ${t('page-title')}`, [t]);
+
   return (
     <>
       <Head>
-        <title>GraphiQL : {t('page-title')}</title>
+        <title>{pageTitle}</title>
       </Head>
       <Layout>
         <div className={styles.container}>

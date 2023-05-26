@@ -3,14 +3,17 @@ import styles from '@/styles/home.module.scss';
 import Head from 'next/head';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { useMemo } from 'react';
 
 export default function Home() {
   const { t } = useTranslation('pages/welcome');
 
+  const pageTitle = useMemo(() => `GraphiQL : ${t('page-title')}`, [t]);
+
   return (
     <>
       <Head>
-        <title>GraphiQL : {t('page-title')}</title>
+        <title>{pageTitle}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>

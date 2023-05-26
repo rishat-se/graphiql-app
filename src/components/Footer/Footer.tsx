@@ -15,7 +15,7 @@ export default function Footer() {
   return (
     <footer className={rootRoute ? styles.footer : styles.special}>
       <div className={styles.logo}>
-        <Link href="https://rs.school/react/">
+        <Link href={'https://rs.school/react/'}>
           <Image src={RssLogo} width={70} height={40} alt="course logo" />
         </Link>
       </div>

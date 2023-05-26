@@ -5,16 +5,19 @@ import { useAppSelector } from '@/hooks/redux';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Head from 'next/head';
+import { useMemo } from 'react';
 
 export default function Auth() {
   const { isAuth } = useAppSelector((state) => state.authReducer);
   const notAuthrized = isAuth === false;
   const { t } = useTranslation('pages/signUp');
 
+  const pageTitle = useMemo(() => `GraphiQL : ${t('page-title')}`, [t]);
+
   return (
     <>
       <Head>
-        <title>GraphiQL : {t('page-title')}</title>
+        <title>{pageTitle}</title>
       </Head>
       <Layout>{notAuthrized ? <Form /> : <Loading />}</Layout>
     </>
