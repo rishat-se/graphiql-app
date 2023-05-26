@@ -1,24 +1,39 @@
-import { GraphQLClient } from 'graphql-request';
-import useSWR from 'swr';
+import request from 'graphql-request';
 import { IntrospectionQuery, buildClientSchema, getIntrospectionQuery } from 'graphql';
 import DocExplorer, { DocGraphQLSchema } from '@/components//DocExplorer/DocExplorer';
 import { API_BASE_LINK } from '@/constants';
-
-const introQuery = getIntrospectionQuery();
-
-const client = new GraphQLClient(API_BASE_LINK, { headers: {} });
-
-const fetcher = async (query: string) => {
-  // await new Promise((resolve) => setTimeout(resolve, 3000));
-  return await client.request(query);
-};
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../store';
+import { setIsError, setIsLoading } from '../../store/slices/docexplorerSlice';
+import { useEffect, useState } from 'react';
 
 export default function SchemaFetcher() {
-  const { data } = useSWR(introQuery, fetcher, { suspense: true });
+  const [data, setData] = useState<IntrospectionQuery | null>(null);
+  const isVisible = useSelector((state: RootState) => state.docexplorer.isVisible);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const introQuery = getIntrospectionQuery();
+    dispatch(setIsLoading({ isLoading: true }));
+    const fetcher = async (query: string) => {
+      try {
+        const res = await request(API_BASE_LINK, query);
+        setData(res as IntrospectionQuery);
+      } catch (err) {
+        if (err instanceof Error) {
+          dispatch(setIsError({ error: { isError: true, message: err.message } }));
+        } else {
+          dispatch(setIsError({ error: { isError: true, message: String(err) } }));
+        }
+      }
+      dispatch(setIsLoading({ isLoading: false }));
+    };
+    fetcher(introQuery);
+  }, []);
 
   const docSchema = buildClientSchema(data as IntrospectionQuery) as DocGraphQLSchema;
 
   docSchema.name = 'Docs';
 
-  return <DocExplorer schema={docSchema} />;
+  return isVisible ? <DocExplorer schema={docSchema} /> : <div></div>;
 }

@@ -3,8 +3,9 @@
 .container {
   flex-grow: 1;
   display: flex;
+  // display: grid;
   gap: 10px;
-
+  // grid-template-columns: auto 1fr 2fr;
   padding: 10px;
 
   @media (max-width: 1000px) {

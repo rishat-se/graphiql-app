@@ -2,6 +2,8 @@
 
 .editor {
   display: grid;
+  flex-basis: 0;
+  flex-grow: 2;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: min-content 1fr;
   grid-auto-flow: column;
