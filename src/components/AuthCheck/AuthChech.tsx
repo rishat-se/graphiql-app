@@ -5,13 +5,16 @@ import { deleteCookie, getCookie } from 'cookies-next';
 import { getAuth } from 'firebase/auth';
 import jwt, { JwtPayload } from 'jsonwebtoken';
 import { useRouter } from 'next/router';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import Loading from '../Loading/Loading';
 
 export default function AuthCheck({ children }: { children: React.ReactNode }) {
   const { signIn, singOut } = authSlice.actions;
+  const [loading, setLoading] = useState<boolean>(true);
   const dispatch = useAppDispatch();
   const router = useRouter();
   const { pathname } = useRouter();
+
   //experimental feature
   const tokenTest = async () => {
     const expTime = await getAuth().currentUser?.getIdToken();
@@ -35,18 +38,18 @@ export default function AuthCheck({ children }: { children: React.ReactNode }) {
     router.events.on('beforeHistoryChange', () => {
       if (!getCookie('logged')) {
         us.signOut();
-        return;
+        setLoading(false);
       } else {
         us.onAuthStateChanged((user) => {
           if (user) {
             dispatch(signIn({ isAuth: true, email: user.email }));
-            return;
+            setLoading(false);
           } else {
             us.signOut();
             deleteCookie('logged');
             dispatch(singOut());
             router.push(pathname && '/');
-            return;
+            setLoading(false);
           }
         });
       }
@@ -54,5 +57,5 @@ export default function AuthCheck({ children }: { children: React.ReactNode }) {
     tokenTest();
   }, []);
 
-  return <>{children}</>;
+  return loading ? <Loading /> : <>{children}</>;
 }

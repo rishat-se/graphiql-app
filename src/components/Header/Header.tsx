@@ -1,10 +1,10 @@
 import Navbar from '@/components/Navigation/Nanigation';
 import { useAppSelector } from '@/hooks/redux';
+import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import styles from './header.module.scss';
-import { useRouter } from 'next/router';
-import { useTranslation } from 'next-i18next';
 
 export default function Header() {
   const { email } = useAppSelector((state) => state.authReducer);

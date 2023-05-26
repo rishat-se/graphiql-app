@@ -1,8 +1,8 @@
 import Layout from '@/components/Layout/Layout';
 import styles from '@/styles/home.module.scss';
-import Head from 'next/head';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import Head from 'next/head';
 import { useMemo } from 'react';
 
 export default function Home() {
