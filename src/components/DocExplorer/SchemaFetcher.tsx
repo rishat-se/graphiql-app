@@ -20,7 +20,6 @@ export default function SchemaFetcher() {
 
   const [docHistory, setDocHistory] = useState<DocNode[]>([{} as DocGraphQLSchema]);
   const [showErrorModal, setShowErrorModal] = useState(false);
-  // console.log(docHistory);
 
   const setCurNode = (node: DocNode) => {
     setDocHistory([...docHistory, node]);

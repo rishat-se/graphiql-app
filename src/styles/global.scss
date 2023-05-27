@@ -5,8 +5,13 @@
 
 #__next {
   background-color: rgb(0, 1, 1);
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   position: relative;
+
+  @media (max-width: 768px) {
+    height: auto;
+    min-height: 100vh;
+  }
 }
