@@ -1,6 +1,6 @@
 import linksStyles from '@/components/DevComponent/dev.module.scss';
 import DevsGits from '@/components/DevsGits/DevsGits';
-import styles from '@/components/footer/footer.module.scss';
+import styles from '@/components/Footer/footer.module.scss';
 import { devsArray } from '@/constants/devs';
 import Image from 'next/image';
 import Link from 'next/link';
