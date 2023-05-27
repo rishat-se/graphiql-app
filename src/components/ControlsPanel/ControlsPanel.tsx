@@ -4,11 +4,11 @@ import Image from 'next/image';
 import DocIcon from '../../../public/icons/header-docs_1.svg';
 import StopIcon from '../../../public/icons/No_sign.svg';
 import RepeatIcon from '../../../public/icons/reload_7.svg';
-import SettingsIcon from '../../../public/icons/cog_6.svg';
-import HotkeysIcon from '../../../public/icons/short-text_2.svg';
+// import SettingsIcon from '../../../public/icons/cog_6.svg';
+// import HotkeysIcon from '../../../public/icons/short-text_2.svg';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store';
-import { hideDocExplorer, showDocExplorer } from '../../store/slices/docexplorerSlice';
+import { hideDocExplorer, showDocExplorer, startReload } from '../../store/slices/docexplorerSlice';
 
 export default function ControlsPanel() {
   const {
@@ -22,6 +22,10 @@ export default function ControlsPanel() {
     if (!(isLoading || isError)) {
       dispatch(isVisible ? hideDocExplorer() : showDocExplorer());
     }
+  };
+
+  const handleReloadClick = () => {
+    dispatch(startReload());
   };
 
   return (
@@ -51,15 +55,15 @@ export default function ControlsPanel() {
       </button>
 
       <div className={styles.controls__other}>
-        <button className={styles.controls__button}>
+        {/* <button className={styles.controls__button}>
           <Image src={HotkeysIcon} width={40} height={37} alt="Show hot keys" />
+        </button> */}
+        <button onClick={handleReloadClick} className={styles.controls__button}>
+          <Image src={RepeatIcon} width={39} height={33} alt="Reload schema" />
         </button>
-        <button className={styles.controls__button}>
-          <Image src={RepeatIcon} width={39} height={33} alt="Repeat request" />
-        </button>
-        <button className={styles.controls__button}>
+        {/* <button className={styles.controls__button}>
           <Image src={SettingsIcon} width={39} height={30} alt="Show settings" />
-        </button>
+        </button> */}
       </div>
     </section>
   );

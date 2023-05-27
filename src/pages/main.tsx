@@ -17,8 +17,10 @@ export default function Main() {
       <Layout>
         <main className={styles.container}>
           <ControlsPanel />
-          <DocExplorerDynamicLoader />
-          <CodeEditor />
+          <div className={styles.panels}>
+            <DocExplorerDynamicLoader />
+            <CodeEditor />
+          </div>
         </main>
       </Layout>
     </>

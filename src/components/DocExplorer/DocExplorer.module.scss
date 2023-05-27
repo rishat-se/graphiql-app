@@ -7,7 +7,14 @@
   color: $lightgray;
   font-size: 15px;
   padding: 10px;
-  background-color: rgba(50, 50, 50);
+  // background-color: rgba(50, 50, 50);
+  overflow-y: auto;
+  // height: 100%;
+  max-height: 100%;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 
   &__view {
     margin-inline-start: 0.5rem;
@@ -33,6 +40,7 @@
     margin-block: 0.25rem;
     margin-inline-start: 0.5rem;
   }
+
   h2 {
     font-size: 22px;
     margin-block-start: 1rem;

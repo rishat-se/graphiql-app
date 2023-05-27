@@ -7,6 +7,7 @@ interface IDocExplorerSliceState {
     isError: boolean;
     message: string;
   };
+  toggleAndReload: boolean;
 }
 
 const initialState: IDocExplorerSliceState = {
@@ -16,6 +17,7 @@ const initialState: IDocExplorerSliceState = {
     isError: false,
     message: '',
   },
+  toggleAndReload: false,
 };
 
 export const docExplorerSlice = createSlice({
@@ -34,10 +36,13 @@ export const docExplorerSlice = createSlice({
     setIsError(state, action) {
       state.error = action.payload.error;
     },
+    startReload(state) {
+      state.toggleAndReload = !state.toggleAndReload;
+    },
   },
 });
 
-export const { showDocExplorer, hideDocExplorer, setIsLoading, setIsError } =
+export const { showDocExplorer, hideDocExplorer, setIsLoading, setIsError, startReload } =
   docExplorerSlice.actions;
 
 export default docExplorerSlice.reducer;
