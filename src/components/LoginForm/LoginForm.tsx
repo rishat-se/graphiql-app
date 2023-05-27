@@ -11,10 +11,12 @@ import Eye from '../../../public/icons/eye.svg';
 import ClosedEye from '../../../public/icons/eyeclosed.svg';
 import ErrorModal from '../ErrorModal/ErrorModal';
 import styles from './form.module.scss';
+import { useTranslation } from 'next-i18next';
 
 export default function LoginForm() {
   const [fbError, setFbError] = useState<boolean | string>(false);
   const [visible, setVisible] = useState<boolean>(false);
+  const { t } = useTranslation('components/loginForm');
   const router = useRouter();
 
   const visiblePassword = () => {
@@ -55,42 +57,34 @@ export default function LoginForm() {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>Authorization</h1>
+      <h1 className={styles.title}>{t('title')}</h1>
       <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
         <label className={styles.label} htmlFor="email">
-          <span>Enter your email</span>
+          <span>{t('email-field.label')}</span>
           <input
             {...register('email', {
-              required: 'This field is required.It must be email.',
-              pattern: {
-                value: emailPattern,
-                message: 'This field is required.It must be email.',
-              },
+              required: true,
+              pattern: emailPattern,
             })}
             className={styles.input}
             type="text"
-            placeholder="Some email"
+            placeholder={t('email-field.placeholder') ?? undefined}
             name="email"
             id="email"
           />
-          {errors.email && <p className={styles.error}>{errors.email.message}</p>}
+          {errors.email && <p className={styles.error}>{t('email-field.error')}</p>}
         </label>
         <label className={styles.label} htmlFor="password">
-          <span>Enter your password</span>
+          <span>{t('password-field.label')}</span>
           <div className={styles.password}>
             <input
               {...register('password', {
-                required:
-                  'It will be minimum 8 symbols, at least one letter, one digit, one special character.',
-                pattern: {
-                  value: passwordPattern,
-                  message:
-                    'It will be minimum 8 symbols, at least one letter, one digit, one special character.',
-                },
+                required: true,
+                pattern: passwordPattern,
               })}
               className={styles.input}
               type={visible ? 'text' : 'password'}
-              placeholder="Some password"
+              placeholder={t('password-field.placeholder') ?? undefined}
               name="password"
               id="password"
             />
@@ -105,14 +99,14 @@ export default function LoginForm() {
             </button>
           </div>
 
-          {errors.password && <p className={styles.error}>{errors.password?.message}</p>}
+          {errors.password && <p className={styles.error}>{t('password-field.error')}</p>}
         </label>
         <div className={styles.submit_container}>
-          <input type="submit" className={styles.submit} value="Sign in" />
+          <input type="submit" className={styles.submit} value={t('submit-button') ?? undefined} />
         </div>
       </form>
       {fbError ? (
-        <ErrorModal toggle={closeModal} text="Please enter correct email or password =)" />
+        <ErrorModal toggle={closeModal} text={t('error-modal-message') ?? 'Error'} />
       ) : null}
     </div>
   );

@@ -3,40 +3,45 @@ import { authSlice } from '@/store/slices/userSlice';
 import { deleteCookie } from 'cookies-next';
 import { getAuth } from 'firebase/auth';
 import Link from 'next/link';
-// import { useRouter } from 'next/router';
 import styles from './navigation.module.scss';
+import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
 
 export default function Navbar() {
   const { isAuth } = useAppSelector((state) => state.authReducer);
   const { singOut } = authSlice.actions;
   const dispatch = useAppDispatch();
   const notAuthorized = isAuth === false;
-  // const router = useRouter();
+  const { t } = useTranslation('common');
+  const { pathname } = useRouter();
+  const mainRoot = pathname === '/main';
   const sign = () => {
     const auth = getAuth();
     dispatch(singOut());
     auth.signOut();
     deleteCookie('logged');
-    // router.push('/');
   };
+
   return (
     <nav className={styles.nav}>
       {notAuthorized ? (
         <>
           <Link className={styles.link} href="/signin">
-            Sign in
+            {t('navigation.sign-in')}
           </Link>
           <Link className={styles.link} href="/signup">
-            Sign up
+            {t('navigation.sign-up')}
           </Link>
         </>
       ) : (
         <>
-          <Link className={styles.link} href="/main">
-            Go to main page
-          </Link>
+          {mainRoot ? null : (
+            <Link className={styles.link} href="/main">
+              {t('navigation.link-to-main')}
+            </Link>
+          )}
           <button className={styles.sign__out} type="button" onClick={sign}>
-            Sign out
+            {t('navigation.sign-out')}
           </button>
         </>
       )}

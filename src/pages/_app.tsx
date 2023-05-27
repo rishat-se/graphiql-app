@@ -5,10 +5,11 @@ import '@/styles/nullstyle.scss';
 import type { AppProps } from 'next/app';
 import { Provider } from 'react-redux';
 import '../firebase/firebase';
+import { appWithTranslation } from 'next-i18next';
 
 const store = setupStore();
 
-export default function App({ Component, pageProps }: AppProps) {
+function App({ Component, pageProps }: AppProps) {
   return (
     <Provider store={store}>
       <AuthCheck>
@@ -17,3 +18,5 @@ export default function App({ Component, pageProps }: AppProps) {
     </Provider>
   );
 }
+
+export default appWithTranslation(App);

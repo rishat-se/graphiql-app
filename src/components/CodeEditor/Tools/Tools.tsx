@@ -7,10 +7,12 @@ import ArrowImg from '../../../../public/icons/up-arrow.svg';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import { setHeaders, setToolsIsOpen, setToolsMode, setVariables } from '@/store/slices/editorSlice';
 import { ToolsMode } from '@/constants';
+import { useTranslation } from 'next-i18next';
 
 function Tools() {
   const editorRef = useRef<ReactCodeMirrorRef>(null);
   const dispatch = useAppDispatch();
+  const { t } = useTranslation('components/editor');
   const { variables, headers, isOpen, mode } = useAppSelector(
     (state) => state.editor.current.tools
   );
@@ -44,7 +46,7 @@ function Tools() {
           }`}
           onClick={setVariablesMode}
         >
-          Variables
+          {t('variables')}
         </button>
 
         <button
@@ -53,7 +55,7 @@ function Tools() {
           }`}
           onClick={setHeadersMode}
         >
-          Headers
+          {t('headers')}
         </button>
 
         <button
