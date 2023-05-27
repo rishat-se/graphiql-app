@@ -1,0 +1,83 @@
+@import '@/styles/variables';
+
+.output {
+  flex-grow: 1;
+  flex-basis: 0;
+  font-family: monospace;
+  color: $lightgray;
+  font-size: 16px;
+  padding: 10px;
+  overflow-y: auto;
+  height: 100%;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    min-height: calc(100vh - 130px);
+  }
+
+  @media (max-width: 1000px) {
+    font-size: 14px;
+  }
+
+  &__view {
+    margin-inline-start: 0.5rem;
+  }
+
+  &__description:not(:empty) {
+    margin-block-start: 0.5rem;
+  }
+
+  &__section {
+    margin-block-start: 1rem;
+  }
+
+  &__item {
+    margin-block-start: 0.75rem;
+    margin-inline-start: 0.5rem;
+    &__description {
+      margin-block-start: 0.4rem;
+    }
+  }
+
+  &__subitem {
+    margin-block: 0.25rem;
+    margin-inline-start: 0.5rem;
+  }
+
+  h2 {
+    font-size: 22px;
+    margin-block-start: 1rem;
+  }
+
+  &__typelink {
+    color: $green;
+  }
+
+  &__typelink:hover {
+    text-decoration: underline;
+  }
+
+  &__backlink {
+    color: $lightgray;
+  }
+
+  &__backlink:hover {
+    text-decoration: underline;
+  }
+
+  &__field {
+    color: $blue;
+  }
+
+  &__fieldlink {
+    color: $blue;
+  }
+
+  &__fieldlink:hover {
+    text-decoration: underline;
+  }
+
+  &__argname {
+    color: $red;
+  }
+}

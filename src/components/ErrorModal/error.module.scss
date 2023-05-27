@@ -18,6 +18,7 @@
   padding: 1em;
   animation: blink 0.5s 1 ease, text 2.5s infinite ease-in;
   border: 2px solid $violet;
+  left: calc(50% - 160px);
 }
 
 @keyframes text {
