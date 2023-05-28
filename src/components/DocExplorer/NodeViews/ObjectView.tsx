@@ -12,7 +12,6 @@ export type DocGraphQLFieldMap = ObjMap<DocGraphQLField>;
 
 export default function OueryView({ node }: QueryViewProps) {
   const fieldsMap = node.getFields() as DocGraphQLFieldMap;
-  //add [Symbol.toStringTag] property to field
   Object.keys(fieldsMap).map((field) =>
     Object.defineProperty(fieldsMap[field], Symbol.toStringTag, {
       value: 'DocGraphQLField',

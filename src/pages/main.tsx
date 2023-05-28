@@ -8,8 +8,6 @@ import Head from 'next/head';
 import { useMemo } from 'react';
 import { DocExplorerDynamicLoader } from '@/components/DocExplorer/DocExplorerDynamicLoader';
 
-// const isServer = typeof window === 'undefined';
-
 export default function Main() {
   const { t } = useTranslation('pages/main');
 
