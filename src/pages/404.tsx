@@ -17,6 +17,7 @@ export default function NotFound() {
         <title>{pageTitle}</title>
       </Head>
       <Layout>
+        {' '}
         <div className={styles.container}>
           <div className={styles.content}>
             <h1 className={styles.title}>{t('title')}</h1>

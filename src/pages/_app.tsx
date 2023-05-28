@@ -2,10 +2,10 @@ import AuthCheck from '@/components/AuthCheck/AuthChech';
 import { setupStore } from '@/store';
 import '@/styles/global.scss';
 import '@/styles/nullstyle.scss';
+import { appWithTranslation } from 'next-i18next';
 import type { AppProps } from 'next/app';
 import { Provider } from 'react-redux';
 import '../firebase/firebase';
-import { appWithTranslation } from 'next-i18next';
 
 const store = setupStore();
 
