@@ -36,7 +36,7 @@ export default function CodeEditor() {
       const timeoutId = setTimeout(() => {
         setModalError(null);
         clearTimeout(timeoutId);
-      }, 3000);
+      }, 5000);
     }
   };
 

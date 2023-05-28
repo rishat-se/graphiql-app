@@ -7,10 +7,49 @@
   justify-content: space-between;
   align-items: center;
   gap: 20px;
-  font-size: 2em;
+  font-size: 2rem;
   height: 60px;
+
+  @media (max-width: 1000px) {
+    font-size: 16px;
+  }
+}
+
+.headerWrapper {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+
   @media (max-width: 768px) {
-    font-size: 1em;
+    position: fixed;
+    z-index: 11;
+    top: 0;
+    right: -2000px;
+
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+
+    width: 250px;
+    height: 50vh;
+    padding: 15px;
+    padding-top: 50px;
+
+    background-color: $darkgreen;
+    transition: 0.3s;
+
+    &_active {
+      right: 0;
+    }
+
+    nav {
+      flex-direction: column;
+    }
+
+    .toggle {
+      margin-left: 0;
+    }
   }
 }
 
@@ -23,7 +62,7 @@
   justify-content: space-between;
   align-items: center;
   gap: 20px;
-  font-size: 2em;
+  font-size: 2rem;
 
   height: 60px;
   z-index: 10;
@@ -111,4 +150,46 @@
       background-position: right 2px top 2px;
     }
   }
+}
+
+.openBurger {
+  width: 36px;
+  height: 36px;
+
+  background-image: url(../../../public/icons/burger-menu.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: transparent;
+}
+
+.closeBurger {
+  position: absolute;
+  top: 5px;
+  left: 10px;
+
+  width: 20px;
+  height: 20px;
+
+  color: $green;
+  text-shadow: $textShadowGreen;
+  text-align: center;
+  font-size: 22px;
+  vertical-align: center;
+  background-color: transparent;
+
+  &:hover {
+    color: $violet;
+    text-shadow: $textShadowViolet;
+  }
+}
+
+.overlay {
+  position: fixed;
+  z-index: 10;
+
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
