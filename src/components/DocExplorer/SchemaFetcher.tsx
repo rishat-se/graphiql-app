@@ -1,6 +1,6 @@
 import request from 'graphql-request';
 import { IntrospectionQuery, buildClientSchema, getIntrospectionQuery } from 'graphql';
-import DocExplorer, { DocGraphQLSchema, DocNode } from '@/components//DocExplorer/DocExplorer';
+import DocExplorer, { DocGraphQLSchema, DocNode } from '@/components/DocExplorer/DocExplorer';
 import { API_BASE_LINK } from '@/constants';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store';

@@ -5,7 +5,7 @@ import { tags as t } from '@lezer/highlight';
 const CODEMIRROR_SETTINGS: Settings = {
   background: 'transparent',
   foreground: 'rgba(73, 193, 43, 1)',
-  caret: '#5d00ff',
+  caret: '#ffffff',
   selection: '#036dd626',
   selectionMatch: '#036dd626',
   lineHighlight: 'transparent',

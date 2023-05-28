@@ -8,7 +8,6 @@ type QueryViewProps = {
 
 export default function UnionView({ node }: QueryViewProps) {
   const possibleTypes = node.getTypes();
-  console.log(possibleTypes);
 
   return (
     <div className={styles.output__view}>
