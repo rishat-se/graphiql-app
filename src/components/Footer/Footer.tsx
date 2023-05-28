@@ -9,21 +9,19 @@ import RssLogo from '../../../public/icons/vectorpaint.svg';
 
 export default function Footer() {
   const { pathname } = useRouter();
-
   const rootRoute = pathname === '/';
 
   return (
-    <footer className={rootRoute ? styles.footer : styles.special}>
-      <div className={styles.logo}>
-        <Link href={'https://rs.school/react/'}>
-          <Image src={RssLogo} width={70} height={40} alt="course logo" />
-        </Link>
-      </div>
-      <p className={styles.year}>2023</p>
+    <footer className={styles.footer}>
+      <Link className={styles.logo} href={'https://rs.school/react/'}>
+        <Image src={RssLogo} width={70} height={40} alt="course logo" />
+      </Link>
       {rootRoute ? (
-        <DevsGits devs={devsArray.devs} />
+        <div className={styles.devs}>
+          <DevsGits devs={devsArray.devs} />
+        </div>
       ) : (
-        <div className={linksStyles.devs}>
+        <div className={`${linksStyles.devs} ${styles.devs}`}>
           <Link className={linksStyles.link} href="https://github.com/rishat-se">
             rishat-se
           </Link>
@@ -35,6 +33,7 @@ export default function Footer() {
           </Link>
         </div>
       )}
+      <p className={styles.year}>2023</p>
     </footer>
   );
 }

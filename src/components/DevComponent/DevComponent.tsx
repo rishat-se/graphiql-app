@@ -10,7 +10,7 @@ export default function DevComponent(dev: IDevsComp) {
     <Link href={link} className={styles.link}>
       <div className={styles.devcontainer}>
         <Image width={70} src={image} alt="dev-picture"></Image>
-        <span>{name}</span>
+        <span className={styles.nickname}>{name}</span>
       </div>
     </Link>
   );
