@@ -1,7 +1,7 @@
 @import '../../styles/variables.scss';
 
 .modal {
-  position: absolute;
+  position: fixed;
   width: 320px;
   height: 320px;
   background: #000000de;
@@ -14,11 +14,12 @@
   justify-content: center;
   align-items: center;
   border-radius: 5px;
-  transform: translateY(50%) scale(1);
   padding: 1em;
   animation: blink 0.5s 1 ease, text 2.5s infinite ease-in;
   border: 2px solid $violet;
-  left: calc(50% - 160px);
+  left: 50vw;
+  top: 50vh;
+  transform: translateX(-160px) translateY(-160px) scale(1);
 }
 
 @keyframes text {
@@ -35,22 +36,22 @@
 
 @keyframes blink {
   0% {
-    transform: translateY(50%) scale(0.1);
+    transform: translateX(-160px) translateY(-160px) scale(0.1);
   }
   20% {
-    transform: translateY(50%) scale(0.3);
+    transform: translateX(-160px) translateY(-160px) scale(0.3);
   }
   40% {
-    transform: translateY(50%) scale(0.5);
+    transform: translateX(-160px) translateY(-160px) scale(0.5);
   }
   60% {
-    transform: translateY(50%) scale(0.7);
+    transform: translateX(-160px) translateY(-160px) scale(0.7);
   }
   80% {
-    transform: translateY(50%) scale(0.9);
+    transform: translateX(-160px) translateY(-160px) scale(0.9);
   }
   100% {
-    transform: translateY(50%) scale(1);
+    transform: translateX(-160px) translateY(-160px) scale(1);
   }
 }
 

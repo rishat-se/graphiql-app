@@ -18,10 +18,6 @@
   background-color: #0e1a1c;
   border-radius: 5px;
 
-  // @media (max-width: 1000px) {
-  //   flex-grow: 2;
-  // }
-
   @media (max-width: 768px) {
     grid-template-columns: 100%;
     grid-template-rows: min-content 1fr 1fr;

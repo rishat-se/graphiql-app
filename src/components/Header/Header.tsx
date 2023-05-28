@@ -10,6 +10,8 @@ export default function Header() {
   const { email } = useAppSelector((state) => state.authReducer);
   const [sticky, setSticky] = useState<boolean>(false);
   const { pathname, locale, push } = useRouter();
+  const [canDisplayBurger, setCanDisplayBurger] = useState<boolean>(false);
+  const [showBurger, setShowBurger] = useState<boolean>(false);
   const { t } = useTranslation('common');
 
   const changeLocaleHandler = () => {
@@ -26,8 +28,28 @@ export default function Header() {
     }
   };
 
+  const displayBurgerHandler = () => {
+    if (window.innerWidth <= 768) {
+      setCanDisplayBurger(true);
+    } else {
+      setCanDisplayBurger(false);
+      closeBurger();
+    }
+  };
+
+  const openBurger = () => {
+    setShowBurger(true);
+  };
+
+  const closeBurger = () => {
+    setShowBurger(false);
+  };
+
+  useEffect(() => displayBurgerHandler(), []);
+
   useEffect(() => {
     window.addEventListener('scroll', makeSticky);
+    window.addEventListener('resize', displayBurgerHandler);
   }, [email]);
 
   return (
@@ -35,31 +57,50 @@ export default function Header() {
       <Link href="/" className={styles.logo}>
         Codeminers
       </Link>
-      {email && (
-        <p className={styles.user}>
-          {t('header.logged-as')}: {email}
-        </p>
-      )}
-      <Navbar />
-      <label className={styles.toggle}>
-        <span
-          className={`${styles.toggle__item} ${locale === 'by' ? styles.toggle__item_active : ''}`}
-        >
-          By
-        </span>
-        <input
-          type="radio"
-          className={`${styles.toggle__switcher} ${
-            locale === 'en' ? styles.toggle__switcher_active : ''
-          }`}
-          onClick={changeLocaleHandler}
-        />
-        <span
-          className={`${styles.toggle__item} ${locale === 'en' ? styles.toggle__item_active : ''}`}
-        >
-          En
-        </span>
-      </label>
+
+      {canDisplayBurger && <button className={styles.openBurger} onClick={openBurger}></button>}
+
+      {showBurger && <div className={styles.overlay} onClick={closeBurger}></div>}
+
+      <div className={`${styles.headerWrapper} ${showBurger ? styles.headerWrapper_active : ''}`}>
+        {showBurger && (
+          <button className={styles.closeBurger} onClick={closeBurger}>
+            X
+          </button>
+        )}
+
+        {email && (
+          <p className={styles.user}>
+            {t('header.logged-as')}: {email}
+          </p>
+        )}
+
+        <Navbar />
+
+        <label className={styles.toggle}>
+          <span
+            className={`${styles.toggle__item} ${
+              locale === 'by' ? styles.toggle__item_active : ''
+            }`}
+          >
+            By
+          </span>
+          <input
+            type="radio"
+            className={`${styles.toggle__switcher} ${
+              locale === 'en' ? styles.toggle__switcher_active : ''
+            }`}
+            onClick={changeLocaleHandler}
+          />
+          <span
+            className={`${styles.toggle__item} ${
+              locale === 'en' ? styles.toggle__item_active : ''
+            }`}
+          >
+            En
+          </span>
+        </label>
+      </div>
     </header>
   );
 }
