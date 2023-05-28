@@ -4,10 +4,23 @@
   flex-grow: 1;
   display: flex;
   gap: 10px;
-
   padding: 10px;
+  height: 0%;
 
   @media (max-width: 1000px) {
+    flex-direction: column;
+  }
+}
+
+.panels {
+  display: flex;
+  flex-grow: 1;
+
+  @media (max-width: 1000px) {
+    height: 0%;
+  }
+
+  @media (max-width: 768px) {
     flex-direction: column;
   }
 }

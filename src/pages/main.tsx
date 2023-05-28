@@ -6,6 +6,9 @@ import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Head from 'next/head';
 import { useMemo } from 'react';
+import { DocExplorerDynamicLoader } from '@/components/DocExplorer/DocExplorerDynamicLoader';
+
+// const isServer = typeof window === 'undefined';
 
 export default function Main() {
   const { t } = useTranslation('pages/main');
@@ -21,8 +24,10 @@ export default function Main() {
       <Layout>
         <main className={styles.container}>
           <ControlsPanel />
-
-          <CodeEditor />
+          <div className={styles.panels}>
+            <DocExplorerDynamicLoader />
+            <CodeEditor />
+          </div>
         </main>
       </Layout>
     </>
