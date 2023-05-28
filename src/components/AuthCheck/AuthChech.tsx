@@ -35,30 +35,25 @@ export default function AuthCheck({ children }: { children: React.ReactNode }) {
 
   const us = getAuth(app);
   useEffect(() => {
-    router.events.on('beforeHistoryChange', () => {
-      if (!getCookie('logged')) {
-        us.signOut();
-        setLoading(false);
-      } else {
-        us.onAuthStateChanged((user) => {
-          if (user) {
-            dispatch(signIn({ isAuth: true, email: user.email }));
-            setLoading(false);
-          } else {
-            us.signOut();
-            deleteCookie('logged');
-            dispatch(singOut());
-            router.push(pathname && '/');
-            setLoading(false);
-          }
-        });
-      }
-    });
-    setTimeout(() => {
+    if (!getCookie('logged')) {
+      us.signOut();
       setLoading(false);
-    }, 1000);
+    } else {
+      us.onAuthStateChanged((user) => {
+        if (user) {
+          dispatch(signIn({ isAuth: true, email: user.email }));
+          setLoading(false);
+        } else {
+          us.signOut();
+          deleteCookie('logged');
+          dispatch(singOut());
+          router.push(pathname && '/');
+          setLoading(false);
+        }
+      });
+    }
     tokenTest();
-  }, []);
+  }, [pathname]);
 
   return loading ? <Loading /> : <>{children}</>;
 }

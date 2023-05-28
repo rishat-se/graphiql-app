@@ -1,3 +1,4 @@
+import Layout from '@/components/Layout/Layout';
 import styles from '@/styles/notfound.module.scss';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
@@ -15,16 +16,19 @@ export default function NotFound() {
       <Head>
         <title>{pageTitle}</title>
       </Head>
-      <div className={styles.container}>
-        <div className={styles.content}>
-          <h1 className={styles.title}>{t('title')}</h1>
-          <p className={styles.error}>{t('error')}</p>
-          <p className={styles.error__desc}>{t('error-desc')}</p>
-          <Link className={styles.link} href="/">
-            {t('link-to-init')}
-          </Link>
+      <Layout>
+        {' '}
+        <div className={styles.container}>
+          <div className={styles.content}>
+            <h1 className={styles.title}>{t('title')}</h1>
+            <p className={styles.error}>{t('error')}</p>
+            <p className={styles.error__desc}>{t('error-desc')}</p>
+            <Link className={styles.link} href="/">
+              {t('link-to-init')}
+            </Link>
+          </div>
         </div>
-      </div>
+      </Layout>
     </>
   );
 }
