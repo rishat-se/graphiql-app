@@ -58,7 +58,11 @@ export default function CodeEditor() {
                 onChange={onChange}
               />
             </div>
-            <button className={styles.editor__reqButton} onClick={requestHandler}>
+            <button
+              className={styles.editor__reqButton}
+              onClick={requestHandler}
+              {...(modalError ? { disabled: true } : {})}
+            >
               <Image src={PlayIcon} width={40} height={40} alt="Send request" />
             </button>
           </div>
