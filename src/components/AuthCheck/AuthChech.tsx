@@ -54,6 +54,9 @@ export default function AuthCheck({ children }: { children: React.ReactNode }) {
         });
       }
     });
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
     tokenTest();
   }, []);
 
