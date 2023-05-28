@@ -1,0 +1,120 @@
+@import '../../styles/variables.scss';
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 2.3em;
+  margin-top: 8em;
+  margin-bottom: 15px;
+  z-index: 3;
+  position: relative;
+  text-align: center;
+}
+
+.container {
+  font-family: $RMfont;
+  background: url('../../../public/images/portal.gif');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2em;
+  width: 100%;
+  align-items: center;
+  padding: 2em;
+  position: relative;
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 2;
+    background-color: rgba(0, 0, 0, 0.425);
+  }
+  @media (max-width: 768px) {
+    background-size: cover;
+  }
+}
+
+.title {
+  font-size: 2em;
+  color: $green;
+  text-shadow: $textShadowGreen;
+  z-index: 3;
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em;
+  color: $violet;
+  text-shadow: $textShadowViolet;
+  font-size: 1.8em;
+  justify-content: center;
+  align-items: center;
+}
+
+.input {
+  border-radius: 5px;
+  background-color: $grey;
+  font-size: 0.6em;
+  height: 2.5em;
+  padding: 1em;
+  text-align: center;
+  color: $green;
+  text-shadow: $textShadowGreen;
+  width: 300px;
+  &::placeholder {
+    font-size: 1.3em;
+    color: $red;
+    text-shadow: $textShadowRed;
+  }
+}
+
+.submit_container {
+  display: flex;
+  gap: 1em;
+  justify-content: center;
+  color: $red;
+  text-shadow: $textShadowRed;
+  font-size: 1.7em;
+}
+
+.submit {
+  color: $red;
+  text-shadow: $textShadowRed;
+  font-size: 1.7em;
+  background-color: transparent;
+  transition: all 0.3s ease;
+  &:hover {
+    color: $violet;
+    text-shadow: $textShadowViolet;
+  }
+}
+
+.error {
+  color: $red;
+  text-shadow: $textShadowRed;
+  font-size: 0.7em;
+  max-width: 300px;
+  text-align: center;
+}
+
+.password {
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.button {
+  position: absolute;
+  right: -5px;
+  top: 0;
+  bottom: 0;
+  background-color: transparent;
+  cursor: pointer;
+}

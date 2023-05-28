@@ -1,0 +1,12 @@
+{
+  "header": {
+    "logged-as": "Karystaĺnik"
+  },
+  "navigation": {
+    "sign-in": "Uvajści",
+    "sign-up": "Zarehistravacca",
+    "sign-out": "Vyjści",
+    "link-to-main": "Na Hałoŭnuju"
+  },
+  "loading": "Zahruzka..."
+}

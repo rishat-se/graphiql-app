@@ -1,0 +1,15 @@
+{
+  "title": "Rehistracyja",
+  "email-field": {
+    "label": "Uviadzicie svoj adras elektronnaj pošty",
+    "placeholder": "Niejkaja pošta",
+    "error": "Heta pole abaviazkovaje. Heta pavinna być elektronnaja pošta."
+  },
+  "password-field": {
+    "label": "Uviadzicie svoj parol",
+    "placeholder": "Niejki parol",
+    "error": "Nieabchodna minimum 8 symbalaŭ, chacia b adna litara, adna ličba, adzin specyjalny symbal."
+  },
+  "submit-button": "Zarehistravacca",
+  "error-modal-message": "Karystalnik z takim adrasam elektronnaj pošty ŭžo isnuje, uviadzicie inšy adras =)"
+}

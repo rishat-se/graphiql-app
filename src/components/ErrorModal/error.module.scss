@@ -1,0 +1,76 @@
+@import '../../styles/variables.scss';
+
+.modal {
+  position: fixed;
+  width: 320px;
+  height: 320px;
+  background: #000000de;
+  color: $red;
+  text-shadow: $textShadowRed;
+  display: flex;
+  flex-direction: column;
+  font-size: 2em;
+  z-index: 5;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  padding: 1em;
+  animation: blink 0.5s 1 ease, text 2.5s infinite ease-in;
+  border: 2px solid $violet;
+  left: 50vw;
+  top: 50vh;
+  transform: translateX(-160px) translateY(-160px) scale(1);
+}
+
+@keyframes text {
+  0% {
+    box-shadow: 1px -3px 24px 15px $violet;
+  }
+  50% {
+    box-shadow: 1px -3px 24px 15px $green;
+  }
+  100% {
+    box-shadow: 1px -3px 24px 15px $red;
+  }
+}
+
+@keyframes blink {
+  0% {
+    transform: translateX(-160px) translateY(-160px) scale(0.1);
+  }
+  20% {
+    transform: translateX(-160px) translateY(-160px) scale(0.3);
+  }
+  40% {
+    transform: translateX(-160px) translateY(-160px) scale(0.5);
+  }
+  60% {
+    transform: translateX(-160px) translateY(-160px) scale(0.7);
+  }
+  80% {
+    transform: translateX(-160px) translateY(-160px) scale(0.9);
+  }
+  100% {
+    transform: translateX(-160px) translateY(-160px) scale(1);
+  }
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  background: transparent;
+  color: inherit;
+  font-size: inherit;
+  text-shadow: inherit;
+  &:hover {
+    color: $violet;
+    text-shadow: $textShadowViolet;
+  }
+}
+
+.text {
+  text-align: center;
+  line-height: 1.2em;
+}

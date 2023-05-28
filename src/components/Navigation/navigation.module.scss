@@ -1,0 +1,31 @@
+@import '../../styles/variables.scss';
+
+.link {
+  color: $green;
+  text-shadow: $textShadowGreen;
+  transition: all 0.3s ease;
+  &:hover {
+    color: $violet;
+    text-shadow: $textShadowViolet;
+  }
+}
+
+.nav {
+  display: flex;
+  flex: 1 1 auto;
+  justify-content: right;
+  align-items: center;
+  gap: 1em;
+}
+
+.sign__out {
+  font-size: inherit;
+  color: $green;
+  text-shadow: $textShadowGreen;
+  transition: all 0.3s ease;
+  background: transparent;
+  &:hover {
+    color: $violet;
+    text-shadow: $textShadowViolet;
+  }
+}

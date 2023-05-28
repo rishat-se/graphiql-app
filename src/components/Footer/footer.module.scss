@@ -1,0 +1,50 @@
+@import '../../styles/variables';
+
+.footer {
+  font-family: $RMfont;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  padding: 0.5em;
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, min-content);
+    row-gap: 30px;
+  }
+}
+
+.year {
+  font-size: 2em;
+  color: $brightgreen;
+  text-shadow: $textShadowGreen;
+  text-align: right;
+  place-self: end end;
+
+  @media (max-width: 768px) {
+    place-self: center end;
+
+    grid-column: 2 / 3;
+  }
+}
+
+.logo {
+  place-self: end start;
+
+  @media (max-width: 768px) {
+    place-self: center start;
+
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+  }
+}
+
+.devs {
+  place-self: center center;
+
+  @media (max-width: 768px) {
+    place-self: center center;
+
+    grid-column: 1 / 3;
+    grid-row: 1 / 2;
+  }
+}

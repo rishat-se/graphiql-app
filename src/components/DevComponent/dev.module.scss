@@ -1,0 +1,34 @@
+@import '../../styles/variables.scss';
+
+.devcontainer {
+  font-family: $RMfont;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.1em;
+  font-size: 2em;
+}
+
+.link {
+  font-size: 1em;
+  color: $red;
+  text-shadow: $textShadowRed;
+  max-width: 450px;
+  text-align: center;
+  &:hover {
+    transition: all 0.3s ease;
+    color: $violet;
+    text-shadow: $textShadowViolet;
+  }
+}
+
+.devs {
+  display: flex;
+  gap: 10px;
+  font-size: 1.3em;
+}
+
+.nickname {
+  white-space: nowrap;
+}
